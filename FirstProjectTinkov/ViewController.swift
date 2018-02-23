@@ -12,14 +12,47 @@ class ViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
+		self.functionNameLifeCycleOfViewController(#function)
+		
+		view.backgroundColor = .black
 	}
 
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		self.functionNameLifeCycleOfViewController(#function)
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		self.functionNameLifeCycleOfViewController(#function)
+	}
+	
+	override func viewWillLayoutSubviews() {
+		super.viewWillLayoutSubviews()
+		self.functionNameLifeCycleOfViewController(#function)
+	}
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		self.functionNameLifeCycleOfViewController(#function)
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		self.functionNameLifeCycleOfViewController(#function)
+	}
+	
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		self.functionNameLifeCycleOfViewController(#function)
+	}
+	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
 	}
 
-
+	func functionNameLifeCycleOfViewController(_ funcName: String) {
+		NSLog("Name of the view controller's life cycle function %@", funcName)
+	}
 }
 
