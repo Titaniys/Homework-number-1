@@ -14,7 +14,7 @@ class ViewController: UIViewController {
 		super.viewDidLoad()
 		self.functionNameLifeCycleOfViewController(#function)
 		
-		view.backgroundColor = .black
+		view.backgroundColor = .white
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
