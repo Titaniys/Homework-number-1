@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KR3-2z-aJ7">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -10,29 +10,97 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="vUi-Od-EbI">
             <objects>
-                <viewController id="KR3-2z-aJ7" sceneMemberID="viewController">
+                <viewController id="KR3-2z-aJ7" customClass="ProfileViewController" customModule="FirstProjectTinkov" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1es-Pv-Hoa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izl-A3-Ez4">
-                                <rect key="frame" x="166" y="323" width="110" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="personIcon" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sre-lz-bdW">
+                                <rect key="frame" x="20" y="40" width="280" height="280"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="280" id="CeH-dY-bbH"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="280" id="XnD-Il-2P7"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I5Z-qf-tbr">
+                                <rect key="frame" x="20" y="512" width="280" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="zLJ-BU-f66"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="Редактировать">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="editAction:" destination="yAr-qO-s3R" eventType="touchUpInside" id="C9h-e8-LBC"/>
+                                    <action selector="editAction:" destination="KR3-2z-aJ7" eventType="touchUpInside" id="FOt-3O-fEA"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вадим" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJp-79-ayk">
+                                <rect key="frame" x="20" y="367" width="242" height="43"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I love ios development , like butterflies and i live in Tinkoff Bank" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eMo-Up-9KU">
+                                <rect key="frame" x="20" y="411" width="242" height="64.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TtA-2v-GyF">
+                                <rect key="frame" x="250" y="270" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="UJM-By-woY"/>
+                                    <constraint firstAttribute="width" constant="50" id="oh5-nL-zQ5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <state key="normal" title="" image="fotoIcon" backgroundImage="fotoIcon"/>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eMo-Up-9KU" firstAttribute="leading" secondItem="cu4-CR-xiz" secondAttribute="leading" constant="20" id="1Ka-5R-D2r"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TJp-79-ayk" secondAttribute="trailing" constant="20" symbolic="YES" id="54I-D4-yun"/>
+                            <constraint firstItem="TJp-79-ayk" firstAttribute="top" secondItem="TtA-2v-GyF" secondAttribute="bottom" constant="47" id="7EX-Hx-Cqs"/>
+                            <constraint firstItem="TJp-79-ayk" firstAttribute="top" secondItem="sre-lz-bdW" secondAttribute="bottom" constant="46.5" id="B5x-3O-ziI"/>
+                            <constraint firstItem="cu4-CR-xiz" firstAttribute="trailing" secondItem="I5Z-qf-tbr" secondAttribute="trailing" constant="20" id="DLF-UG-Qkn"/>
+                            <constraint firstItem="cu4-CR-xiz" firstAttribute="trailing" secondItem="sre-lz-bdW" secondAttribute="trailing" constant="20" id="EsV-re-bW6"/>
+                            <constraint firstItem="eMo-Up-9KU" firstAttribute="top" secondItem="TJp-79-ayk" secondAttribute="bottom" constant="1.5" id="Snq-1N-1WK"/>
+                            <constraint firstItem="sre-lz-bdW" firstAttribute="trailing" secondItem="TtA-2v-GyF" secondAttribute="trailing" id="UId-pt-Wb2"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eMo-Up-9KU" secondAttribute="trailing" constant="20" symbolic="YES" id="UjC-7k-hl9"/>
+                            <constraint firstAttribute="bottom" secondItem="I5Z-qf-tbr" secondAttribute="bottom" id="Uqj-bV-Y8n"/>
+                            <constraint firstItem="TJp-79-ayk" firstAttribute="width" secondItem="eMo-Up-9KU" secondAttribute="width" id="YRf-CX-3Si"/>
+                            <constraint firstItem="sre-lz-bdW" firstAttribute="leading" secondItem="cu4-CR-xiz" secondAttribute="leading" constant="20" id="ZDx-Vj-S2S"/>
+                            <constraint firstItem="sre-lz-bdW" firstAttribute="centerX" secondItem="I5Z-qf-tbr" secondAttribute="centerX" id="cLq-is-Kla"/>
+                            <constraint firstItem="TJp-79-ayk" firstAttribute="top" secondItem="TtA-2v-GyF" secondAttribute="bottom" constant="47" id="duB-Ob-fMq"/>
+                            <constraint firstItem="TJp-79-ayk" firstAttribute="leading" secondItem="cu4-CR-xiz" secondAttribute="leading" constant="20" id="jI0-Hw-CJg"/>
+                            <constraint firstItem="sre-lz-bdW" firstAttribute="top" secondItem="cu4-CR-xiz" secondAttribute="top" constant="20" id="qpi-TQ-wUT"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="cu4-CR-xiz"/>
                     </view>
+                    <connections>
+                        <outlet property="companyLabel" destination="eMo-Up-9KU" id="ROk-E3-Mwu"/>
+                        <outlet property="editButton" destination="I5Z-qf-tbr" id="2pK-4I-hfN"/>
+                        <outlet property="fotoButton" destination="TtA-2v-GyF" id="2Kg-Qh-7bB"/>
+                        <outlet property="nameLabel" destination="TJp-79-ayk" id="zzD-D5-Cqn"/>
+                        <outlet property="profileImage" destination="sre-lz-bdW" id="eOd-Au-bN2"/>
+                        <outlet property="view" destination="1es-Pv-Hoa" id="5bn-T9-4im"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qEI-ge-nve" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="yAr-qO-s3R" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-340" y="24.7376311844078"/>
+            <point key="canvasLocation" x="-688.125" y="-27.464788732394368"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="fotoIcon" width="194" height="178"/>
+        <image name="personIcon" width="446" height="460"/>
+    </resources>
 </document>
