@@ -12,6 +12,10 @@
 		DD1384CD203DD25000CFE9F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD1384CC203DD25000CFE9F5 /* Assets.xcassets */; };
 		DD1384D0203DD25000CFE9F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD1384CE203DD25000CFE9F5 /* LaunchScreen.storyboard */; };
 		DD1E4360204326E900C18C89 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD1E4362204326E900C18C89 /* Main.storyboard */; };
+		DD3472DC2064486200566287 /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3472DB2064486200566287 /* ThemesViewController.m */; };
+		DD3472E02064493A00566287 /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3472DF2064493A00566287 /* Themes.m */; };
+		DD3472E220644CAF00566287 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3472E120644CAF00566287 /* ConversationsListViewController.swift */; };
+		DD3472E5206454C400566287 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3472E4206454C400566287 /* ConversationTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,13 @@
 		DD1384CF203DD25000CFE9F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD1384D1203DD25000CFE9F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD1E4361204326E900C18C89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DD3472D92064486100566287 /* FirstProjectTinkov-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FirstProjectTinkov-Bridging-Header.h"; sourceTree = "<group>"; };
+		DD3472DA2064486200566287 /* ThemesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemesViewController.h; sourceTree = "<group>"; };
+		DD3472DB2064486200566287 /* ThemesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThemesViewController.m; sourceTree = "<group>"; };
+		DD3472DE2064493A00566287 /* Themes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Themes.h; sourceTree = "<group>"; };
+		DD3472DF2064493A00566287 /* Themes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Themes.m; sourceTree = "<group>"; };
+		DD3472E120644CAF00566287 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
+		DD3472E4206454C400566287 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +71,23 @@
 				DD1E4362204326E900C18C89 /* Main.storyboard */,
 				DD1384CE203DD25000CFE9F5 /* LaunchScreen.storyboard */,
 				DD1384D1203DD25000CFE9F5 /* Info.plist */,
+				DD3472DA2064486200566287 /* ThemesViewController.h */,
+				DD3472DB2064486200566287 /* ThemesViewController.m */,
+				DD3472DE2064493A00566287 /* Themes.h */,
+				DD3472DF2064493A00566287 /* Themes.m */,
+				DD3472D92064486100566287 /* FirstProjectTinkov-Bridging-Header.h */,
+				DD3472E32064549D00566287 /* Conversations */,
 			);
 			path = FirstProjectTinkov;
+			sourceTree = "<group>";
+		};
+		DD3472E32064549D00566287 /* Conversations */ = {
+			isa = PBXGroup;
+			children = (
+				DD3472E120644CAF00566287 /* ConversationsListViewController.swift */,
+				DD3472E4206454C400566287 /* ConversationTableViewCell.swift */,
+			);
+			path = Conversations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +122,7 @@
 				TargetAttributes = {
 					DD1384C1203DD25000CFE9F5 = {
 						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -137,7 +164,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD1384C8203DD25000CFE9F5 /* ProfileViewController.swift in Sources */,
+				DD3472E220644CAF00566287 /* ConversationsListViewController.swift in Sources */,
+				DD3472E5206454C400566287 /* ConversationTableViewCell.swift in Sources */,
+				DD3472E02064493A00566287 /* Themes.m in Sources */,
 				DD1384C6203DD25000CFE9F5 /* AppDelegate.swift in Sources */,
+				DD3472DC2064486200566287 /* ThemesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,7 +203,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
@@ -229,7 +260,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
@@ -274,11 +305,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = FirstProjectTinkov/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CV.FirstProjectTinkov;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FirstProjectTinkov/FirstProjectTinkov-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -288,11 +322,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = FirstProjectTinkov/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CV.FirstProjectTinkov;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FirstProjectTinkov/FirstProjectTinkov-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
