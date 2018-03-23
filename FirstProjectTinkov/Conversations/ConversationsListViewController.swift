@@ -18,9 +18,23 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
         super.viewDidLoad()
     }
 
+	
+	//MARK: UITableViewDelegate
+	
 	override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 70;
 	}
+	
+	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		if section == 0 {
+			return "Online"
+		} else {
+			return "Offline"
+		}
+	}
+	
+	//MARK: UITableViewDataSource
+	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 10
 	}
