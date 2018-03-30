@@ -12,8 +12,12 @@
 		DD1384CD203DD25000CFE9F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD1384CC203DD25000CFE9F5 /* Assets.xcassets */; };
 		DD1384D0203DD25000CFE9F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD1384CE203DD25000CFE9F5 /* LaunchScreen.storyboard */; };
 		DD1E4360204326E900C18C89 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD1E4362204326E900C18C89 /* Main.storyboard */; };
-		DD25C7382065996900856590 /* ContactProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C7372065996900856590 /* ContactProfileViewController.swift */; };
 		DD25C73A206599F800856590 /* MessegesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C739206599F800856590 /* MessegesViewController.swift */; };
+		DD25C73D206BBFCE00856590 /* GCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C73C206BBFCE00856590 /* GCDDataManager.swift */; };
+		DD25C73F206BBFDD00856590 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C73E206BBFDD00856590 /* AsyncOperation.swift */; };
+		DD25C765206D909600856590 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = DD25C764206D909600856590 /* placeholder.png */; };
+		DD25C767206E47C100856590 /* DataModelOfUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C766206E47C100856590 /* DataModelOfUser.swift */; };
+		DD25C769206E64D700856590 /* OperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C768206E64D700856590 /* OperationDataManager.swift */; };
 		DD3472DC2064486200566287 /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3472DB2064486200566287 /* ThemesViewController.m */; };
 		DD3472E02064493A00566287 /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3472DF2064493A00566287 /* Themes.m */; };
 		DD3472E220644CAF00566287 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3472E120644CAF00566287 /* ConversationsListViewController.swift */; };
@@ -28,8 +32,12 @@
 		DD1384CF203DD25000CFE9F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD1384D1203DD25000CFE9F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD1E4361204326E900C18C89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		DD25C7372065996900856590 /* ContactProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactProfileViewController.swift; sourceTree = "<group>"; };
 		DD25C739206599F800856590 /* MessegesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessegesViewController.swift; sourceTree = "<group>"; };
+		DD25C73C206BBFCE00856590 /* GCDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDDataManager.swift; sourceTree = "<group>"; };
+		DD25C73E206BBFDD00856590 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		DD25C764206D909600856590 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder.png; path = "FirstProjectTinkov/Assets.xcassets/placeholder-user.imageset/placeholder.png"; sourceTree = SOURCE_ROOT; };
+		DD25C766206E47C100856590 /* DataModelOfUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelOfUser.swift; sourceTree = "<group>"; };
+		DD25C768206E64D700856590 /* OperationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataManager.swift; sourceTree = "<group>"; };
 		DD3472D92064486100566287 /* FirstProjectTinkov-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FirstProjectTinkov-Bridging-Header.h"; sourceTree = "<group>"; };
 		DD3472DA2064486200566287 /* ThemesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemesViewController.h; sourceTree = "<group>"; };
 		DD3472DB2064486200566287 /* ThemesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThemesViewController.m; sourceTree = "<group>"; };
@@ -70,8 +78,6 @@
 			isa = PBXGroup;
 			children = (
 				DD1384C5203DD25000CFE9F5 /* AppDelegate.swift */,
-				DD1384C7203DD25000CFE9F5 /* ProfileViewController.swift */,
-				DD25C7372065996900856590 /* ContactProfileViewController.swift */,
 				DD25C739206599F800856590 /* MessegesViewController.swift */,
 				DD1384CC203DD25000CFE9F5 /* Assets.xcassets */,
 				DD1E4362204326E900C18C89 /* Main.storyboard */,
@@ -82,9 +88,23 @@
 				DD3472DE2064493A00566287 /* Themes.h */,
 				DD3472DF2064493A00566287 /* Themes.m */,
 				DD3472D92064486100566287 /* FirstProjectTinkov-Bridging-Header.h */,
+				DD25C73B206BBF8A00856590 /* Profile */,
 				DD3472E32064549D00566287 /* Conversations */,
 			);
 			path = FirstProjectTinkov;
+			sourceTree = "<group>";
+		};
+		DD25C73B206BBF8A00856590 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				DD1384C7203DD25000CFE9F5 /* ProfileViewController.swift */,
+				DD25C73C206BBFCE00856590 /* GCDDataManager.swift */,
+				DD25C768206E64D700856590 /* OperationDataManager.swift */,
+				DD25C73E206BBFDD00856590 /* AsyncOperation.swift */,
+				DD25C766206E47C100856590 /* DataModelOfUser.swift */,
+				DD25C764206D909600856590 /* placeholder.png */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		DD3472E32064549D00566287 /* Conversations */ = {
@@ -158,6 +178,7 @@
 			files = (
 				DD1384D0203DD25000CFE9F5 /* LaunchScreen.storyboard in Resources */,
 				DD1E4360204326E900C18C89 /* Main.storyboard in Resources */,
+				DD25C765206D909600856590 /* placeholder.png in Resources */,
 				DD1384CD203DD25000CFE9F5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -169,14 +190,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD25C7382065996900856590 /* ContactProfileViewController.swift in Sources */,
 				DD1384C8203DD25000CFE9F5 /* ProfileViewController.swift in Sources */,
 				DD25C73A206599F800856590 /* MessegesViewController.swift in Sources */,
+				DD25C73D206BBFCE00856590 /* GCDDataManager.swift in Sources */,
 				DD3472E220644CAF00566287 /* ConversationsListViewController.swift in Sources */,
+				DD25C769206E64D700856590 /* OperationDataManager.swift in Sources */,
 				DD3472E5206454C400566287 /* ConversationTableViewCell.swift in Sources */,
 				DD3472E02064493A00566287 /* Themes.m in Sources */,
 				DD1384C6203DD25000CFE9F5 /* AppDelegate.swift in Sources */,
+				DD25C767206E47C100856590 /* DataModelOfUser.swift in Sources */,
 				DD3472DC2064486200566287 /* ThemesViewController.m in Sources */,
+				DD25C73F206BBFDD00856590 /* AsyncOperation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
