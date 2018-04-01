@@ -18,6 +18,8 @@
 		DD25C765206D909600856590 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = DD25C764206D909600856590 /* placeholder.png */; };
 		DD25C767206E47C100856590 /* DataModelOfUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C766206E47C100856590 /* DataModelOfUser.swift */; };
 		DD25C769206E64D700856590 /* OperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C768206E64D700856590 /* OperationDataManager.swift */; };
+		DD25C77020715E4200856590 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C76F20715E4200856590 /* MessageTableViewCell.swift */; };
+		DD25C77220716BBA00856590 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C77120716BBA00856590 /* MessageModel.swift */; };
 		DD3472DC2064486200566287 /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3472DB2064486200566287 /* ThemesViewController.m */; };
 		DD3472E02064493A00566287 /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3472DF2064493A00566287 /* Themes.m */; };
 		DD3472E220644CAF00566287 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3472E120644CAF00566287 /* ConversationsListViewController.swift */; };
@@ -38,6 +40,8 @@
 		DD25C764206D909600856590 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder.png; path = "FirstProjectTinkov/Assets.xcassets/placeholder-user.imageset/placeholder.png"; sourceTree = SOURCE_ROOT; };
 		DD25C766206E47C100856590 /* DataModelOfUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelOfUser.swift; sourceTree = "<group>"; };
 		DD25C768206E64D700856590 /* OperationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataManager.swift; sourceTree = "<group>"; };
+		DD25C76F20715E4200856590 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		DD25C77120716BBA00856590 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		DD3472D92064486100566287 /* FirstProjectTinkov-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FirstProjectTinkov-Bridging-Header.h"; sourceTree = "<group>"; };
 		DD3472DA2064486200566287 /* ThemesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemesViewController.h; sourceTree = "<group>"; };
 		DD3472DB2064486200566287 /* ThemesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThemesViewController.m; sourceTree = "<group>"; };
@@ -78,18 +82,15 @@
 			isa = PBXGroup;
 			children = (
 				DD1384C5203DD25000CFE9F5 /* AppDelegate.swift */,
-				DD25C739206599F800856590 /* MessegesViewController.swift */,
 				DD1384CC203DD25000CFE9F5 /* Assets.xcassets */,
 				DD1E4362204326E900C18C89 /* Main.storyboard */,
 				DD1384CE203DD25000CFE9F5 /* LaunchScreen.storyboard */,
 				DD1384D1203DD25000CFE9F5 /* Info.plist */,
-				DD3472DA2064486200566287 /* ThemesViewController.h */,
-				DD3472DB2064486200566287 /* ThemesViewController.m */,
-				DD3472DE2064493A00566287 /* Themes.h */,
-				DD3472DF2064493A00566287 /* Themes.m */,
 				DD3472D92064486100566287 /* FirstProjectTinkov-Bridging-Header.h */,
+				DD25C76D20715A9B00856590 /* Themes */,
 				DD25C73B206BBF8A00856590 /* Profile */,
-				DD3472E32064549D00566287 /* Conversations */,
+				DD3472E32064549D00566287 /* ConversationList */,
+				DD25C76E20715ABB00856590 /* Conversation */,
 			);
 			path = FirstProjectTinkov;
 			sourceTree = "<group>";
@@ -107,13 +108,34 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		DD3472E32064549D00566287 /* Conversations */ = {
+		DD25C76D20715A9B00856590 /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				DD3472DA2064486200566287 /* ThemesViewController.h */,
+				DD3472DB2064486200566287 /* ThemesViewController.m */,
+				DD3472DE2064493A00566287 /* Themes.h */,
+				DD3472DF2064493A00566287 /* Themes.m */,
+			);
+			path = Themes;
+			sourceTree = "<group>";
+		};
+		DD25C76E20715ABB00856590 /* Conversation */ = {
+			isa = PBXGroup;
+			children = (
+				DD25C739206599F800856590 /* MessegesViewController.swift */,
+				DD25C76F20715E4200856590 /* MessageTableViewCell.swift */,
+				DD25C77120716BBA00856590 /* MessageModel.swift */,
+			);
+			path = Conversation;
+			sourceTree = "<group>";
+		};
+		DD3472E32064549D00566287 /* ConversationList */ = {
 			isa = PBXGroup;
 			children = (
 				DD3472E120644CAF00566287 /* ConversationsListViewController.swift */,
 				DD3472E4206454C400566287 /* ConversationTableViewCell.swift */,
 			);
-			path = Conversations;
+			path = ConversationList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +217,8 @@
 				DD25C73D206BBFCE00856590 /* GCDDataManager.swift in Sources */,
 				DD3472E220644CAF00566287 /* ConversationsListViewController.swift in Sources */,
 				DD25C769206E64D700856590 /* OperationDataManager.swift in Sources */,
+				DD25C77020715E4200856590 /* MessageTableViewCell.swift in Sources */,
+				DD25C77220716BBA00856590 /* MessageModel.swift in Sources */,
 				DD3472E5206454C400566287 /* ConversationTableViewCell.swift in Sources */,
 				DD3472E02064493A00566287 /* Themes.m in Sources */,
 				DD1384C6203DD25000CFE9F5 /* AppDelegate.swift in Sources */,

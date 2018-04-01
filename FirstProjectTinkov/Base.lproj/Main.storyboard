@@ -117,24 +117,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="z6s-ld-gHK">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="z6s-ld-gHK">
+                                <rect key="frame" x="0.0" y="64" width="320" height="474"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="messageCell" id="iNH-Tc-26p">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellMessage" rowHeight="-1" id="pdc-bu-NbK" customClass="MessageTableViewCell" customModule="FirstProjectTinkov" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iNH-Tc-26p" id="Yer-Md-HAT">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pdc-bu-NbK" id="kyg-cc-0E8">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89V-32-KME">
+                                                    <rect key="frame" x="263" y="10" width="42" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="89V-32-KME" secondAttribute="bottom" constant="10" id="7DF-fn-SCd"/>
+                                                <constraint firstAttribute="trailing" secondItem="89V-32-KME" secondAttribute="trailing" constant="15" id="E8v-26-vht"/>
+                                                <constraint firstItem="89V-32-KME" firstAttribute="top" secondItem="kyg-cc-0E8" secondAttribute="top" constant="10" id="dhg-Sg-Ay4"/>
+                                                <constraint firstItem="89V-32-KME" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kyg-cc-0E8" secondAttribute="leading" id="jfS-Px-Bhe"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="textMessageLabel" destination="89V-32-KME" id="sXz-5c-13o"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Bst-Qf-hF6" id="NcD-wM-gq3"/>
+                                    <outlet property="delegate" destination="Bst-Qf-hF6" id="pLB-5n-BZf"/>
+                                </connections>
                             </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ktN-5l-Aft">
+                                <rect key="frame" x="0.0" y="538" width="320" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="z6s-ld-gHK" firstAttribute="bottom" secondItem="xCd-E6-wFT" secondAttribute="bottom" id="74y-S2-f7V"/>
+                            <constraint firstItem="ktN-5l-Aft" firstAttribute="trailing" secondItem="xCd-E6-wFT" secondAttribute="trailing" id="0NB-kW-NHD"/>
+                            <constraint firstItem="z6s-ld-gHK" firstAttribute="bottom" secondItem="xCd-E6-wFT" secondAttribute="bottom" constant="-30" id="74y-S2-f7V"/>
+                            <constraint firstItem="ktN-5l-Aft" firstAttribute="top" secondItem="z6s-ld-gHK" secondAttribute="bottom" id="7MX-Mq-mJ8"/>
+                            <constraint firstItem="ktN-5l-Aft" firstAttribute="leading" secondItem="xCd-E6-wFT" secondAttribute="leading" id="Ve2-td-Ox9"/>
+                            <constraint firstItem="ktN-5l-Aft" firstAttribute="bottom" secondItem="xCd-E6-wFT" secondAttribute="bottom" id="bIh-Gh-997"/>
                             <constraint firstItem="z6s-ld-gHK" firstAttribute="trailing" secondItem="xCd-E6-wFT" secondAttribute="trailing" id="j83-U9-KIO"/>
                             <constraint firstItem="z6s-ld-gHK" firstAttribute="leading" secondItem="xCd-E6-wFT" secondAttribute="leading" id="sg9-QA-pxN"/>
                             <constraint firstItem="z6s-ld-gHK" firstAttribute="top" secondItem="xCd-E6-wFT" secondAttribute="top" id="yqH-1d-6i2"/>
@@ -145,7 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xjw-FQ-weZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-624.375" y="-29.577464788732396"/>
+            <point key="canvasLocation" x="-605.625" y="-31.690140845070424"/>
         </scene>
         <!--Профиль-->
         <scene sceneID="8he-DW-MLo">
