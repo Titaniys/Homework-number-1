@@ -121,7 +121,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="474"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellMessage" rowHeight="-1" id="pdc-bu-NbK" customClass="MessageTableViewCell" customModule="FirstProjectTinkov" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="outgoingCell" rowHeight="-1" id="pdc-bu-NbK" customClass="MessageTableViewCell" customModule="FirstProjectTinkov" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pdc-bu-NbK" id="kyg-cc-0E8">
@@ -144,6 +144,31 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="textMessageLabel" destination="89V-32-KME" id="sXz-5c-13o"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="incomingCell" rowHeight="-1" id="Ubp-2H-SUy" customClass="MessageTableViewCell" customModule="FirstProjectTinkov" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ubp-2H-SUy" id="cX1-PV-KN5">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wuk-gk-mYx">
+                                                    <rect key="frame" x="15" y="10" width="42" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Wuk-gk-mYx" firstAttribute="top" secondItem="cX1-PV-KN5" secondAttribute="top" constant="10" id="EeK-JX-dYh"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Wuk-gk-mYx" secondAttribute="trailing" constant="20" symbolic="YES" id="Z3g-Gb-PxK"/>
+                                                <constraint firstItem="Wuk-gk-mYx" firstAttribute="leading" secondItem="cX1-PV-KN5" secondAttribute="leading" constant="15" id="Z6a-uD-g1o"/>
+                                                <constraint firstAttribute="bottom" secondItem="Wuk-gk-mYx" secondAttribute="bottom" constant="10" id="roj-GZ-esu"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="textMessageLabel" destination="Wuk-gk-mYx" id="K9X-sM-Cch"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

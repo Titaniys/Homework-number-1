@@ -40,52 +40,31 @@ class MessageTableViewCell: UITableViewCell, MessageTableViewCellConfiguration {
 		textMessageLabel.translatesAutoresizingMaskIntoConstraints = false
 		
 		if isIncomming {
-			
-			let leadingConstraint = NSLayoutConstraint(item: textMessageLabel,
-													   attribute: NSLayoutAttribute.leading,
-													   relatedBy: NSLayoutRelation.equal,
-													   toItem: self,
-													   attribute: NSLayoutAttribute.leading,
-													   multiplier: 1,
-													   constant: 15)
-			
+
 			let trailingConstraint = NSLayoutConstraint(item: textMessageLabel,
 														  attribute: NSLayoutAttribute.trailing,
-														  relatedBy: NSLayoutRelation.equal,
+														  relatedBy: NSLayoutRelation.lessThanOrEqual,
 														  toItem: self,
 														  attribute: NSLayoutAttribute.trailing,
 														  multiplier: 1,
 														  constant: -offset)
-			trailingConstraint.priority = UILayoutPriority(rawValue: 1000)
-			trailingConstraint.isActive = true
-			
-			NSLayoutConstraint.activate([leadingConstraint, trailingConstraint])
-			
-			//textMessageLabel?.frame = CGRect(x: 0, y: 0, width: self.frame.width - offset, height: 50)
+
+
+			NSLayoutConstraint.activate([trailingConstraint])
+
 			textMessageLabel.backgroundColor = UIColor.blue
 		}
 		else {
-			//textMessageLabel?.frame = CGRect(x: offset, y: 0, width: self.frame.width - offset, height: 50)
 			textMessageLabel.backgroundColor = UIColor.yellow
 			
-//			let leadingConstraint = NSLayoutConstraint(item: textMessageLabel,
-//														attribute: NSLayoutAttribute.leading,
-//														relatedBy: NSLayoutRelation.greaterThanOrEqual,
-//														toItem: self,
-//														attribute: NSLayoutAttribute.leading,
-//														multiplier: 1,
-//														constant: offset)
-//			leadingConstraint.priority = UILayoutPriority(rawValue: 250)
-//
-//			let trailingConstraint = NSLayoutConstraint(item: textMessageLabel,
-//														attribute: NSLayoutAttribute.trailing,
-//														relatedBy: NSLayoutRelation.equal,
-//														toItem: self,
-//														attribute: NSLayoutAttribute.trailing,
-//														multiplier: 1,
-//														constant: -15)
-//
-//			NSLayoutConstraint.activate([leadingConstraint, trailingConstraint])
+			let leadingConstraint = NSLayoutConstraint(item: textMessageLabel,
+														attribute: NSLayoutAttribute.leading,
+														relatedBy: NSLayoutRelation.greaterThanOrEqual,
+														toItem: self,
+														attribute: NSLayoutAttribute.leading,
+														multiplier: 1,
+														constant: offset)
+			NSLayoutConstraint.activate([leadingConstraint])
 		}
 	}
 	

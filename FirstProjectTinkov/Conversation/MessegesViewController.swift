@@ -17,10 +17,10 @@ class MessegesViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		let firstModel : MessageModel = MessageModel(textMessage: "Incomming sdfsdf  sdf sdf sdf sdfxc xcv sdfdsfsdf sd sdfsdfd sdf sd", isIncomming: true)
+		let firstModel : MessageModel = MessageModel(textMessage: "Incomming sdfsdf  sdf sdf sdf sdfxc xcv sdfdsfsdf sd sdfsdfd sdf xcv sdfdsfsdf sd sdfsdfd sdf sd", isIncomming: true)
 		let firstModel1 : MessageModel = MessageModel(textMessage: "Incomming", isIncomming: true)
 		
-		let secondModel : MessageModel = MessageModel(textMessage: "textMess ageLabel textMe ssageLabel textMessageLabel textMessageLabel textMessageLabel textMessageLabel textMessageLabel", isIncomming: false)
+		let secondModel : MessageModel = MessageModel(textMessage: "textMess ageLabel textMe ssageLabel textMessageLabel textMessageLabel textMessageLabel textMess ageLabel textMe ssageLabel textMessageLabel textMessageLabel textMessageLabel textMessageLabel textMessageLabel", isIncomming: false)
 		let threeModel : MessageModel = MessageModel(textMessage: "textMessage", isIncomming: false)
 		
 		arrayMessages = [firstModel, secondModel, threeModel, firstModel1]
@@ -70,7 +70,7 @@ class MessegesViewController: UIViewController, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
-		let cellIdentifier = "cellMessage"
+		let cellIdentifier = arrayMessages[indexPath.row].isIncomming ? "incomingCell" : "outgoingCell"
 		
 		let cell: MessageTableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MessageTableViewCell
 		
