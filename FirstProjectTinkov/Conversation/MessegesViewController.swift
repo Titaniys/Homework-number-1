@@ -8,9 +8,10 @@
 
 import UIKit
 
-class MessegesViewController: UIViewController, UITableViewDataSource {
+class MessegesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
 
 
+	@IBOutlet var inputTextField: UITextField!
 	var arrayMessages = [MessageModel]()
 	
 	
@@ -31,12 +32,12 @@ class MessegesViewController: UIViewController, UITableViewDataSource {
 		super.viewDidAppear(animated)
 		
 		NotificationCenter.default.addObserver(self,
-											   selector: #selector(ProfileViewController.keyboardWillShow),
+											   selector: #selector(MessegesViewController.keyboardWillShow),
 											   name: NSNotification.Name.UIKeyboardWillShow,
 											   object: nil)
 		
 		NotificationCenter.default.addObserver(self,
-											   selector: #selector(ProfileViewController.keyboardWillHide),
+											   selector: #selector(MessegesViewController.keyboardWillHide),
 											   name: NSNotification.Name.UIKeyboardWillHide,
 											   object: nil)
 		
@@ -61,6 +62,13 @@ class MessegesViewController: UIViewController, UITableViewDataSource {
 			}
 		}
 	}
+	
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		if touches.first != nil {
+			view.endEditing(true)
+		}
+		super.touchesBegan(touches, with: event)
+	}
 
 	//MARK: UITableViewDataSource
 	
@@ -80,5 +88,10 @@ class MessegesViewController: UIViewController, UITableViewDataSource {
 		return cell
 	}
 	
+	//MARK: UITextFieldDelegate
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		inputTextField.resignFirstResponder()
+		return true
+	}
 
 }

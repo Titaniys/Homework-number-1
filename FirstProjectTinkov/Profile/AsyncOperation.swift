@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class AsyncOperation: Operation {
 
 	// Определяем перечисление enum State со свойством keyPath

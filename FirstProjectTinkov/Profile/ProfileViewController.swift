@@ -231,7 +231,6 @@ class ProfileViewController: UIViewController {
 			
 			let writeQueue = OperationQueue()
 			writeQueue.addOperation(readerWriterOperation)
-			writeQueue.waitUntilAllOperationsAreFinished()
 		
 			break
 		default:

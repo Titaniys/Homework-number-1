@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OperationDataManager: AsyncOperation {
+class OperationDataManager: AsyncOperation, ReaderWriterProtocol {
 
 	//File system
 	let fileForPhoto = "fileForPhoto"

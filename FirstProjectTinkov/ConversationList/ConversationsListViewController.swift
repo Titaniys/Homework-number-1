@@ -11,11 +11,14 @@ import UIKit
 
 class ConversationsListViewController: UITableViewController, ThemesViewControllerDelegate {
 
-	
 	var themesVC : ThemesViewController = ThemesViewController()
+	
+	let multipeerConnectivityService = MultipeerConnectivityService()
+	
 
 	override func viewDidLoad() {
         super.viewDidLoad()
+		
     }
 
 	

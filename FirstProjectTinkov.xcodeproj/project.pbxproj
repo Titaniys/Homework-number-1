@@ -24,6 +24,8 @@
 		DD3472E02064493A00566287 /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3472DF2064493A00566287 /* Themes.m */; };
 		DD3472E220644CAF00566287 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3472E120644CAF00566287 /* ConversationsListViewController.swift */; };
 		DD3472E5206454C400566287 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3472E4206454C400566287 /* ConversationTableViewCell.swift */; };
+		DD58E1FC20738E35001FBABA /* MultipeerConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58E1FA20738E34001FBABA /* MultipeerConnectivityService.swift */; };
+		DD58E1FD20738E35001FBABA /* ColorSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58E1FB20738E34001FBABA /* ColorSwitchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 		DD3472DF2064493A00566287 /* Themes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Themes.m; sourceTree = "<group>"; };
 		DD3472E120644CAF00566287 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		DD3472E4206454C400566287 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
+		DD58E1FA20738E34001FBABA /* MultipeerConnectivityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerConnectivityService.swift; sourceTree = "<group>"; };
+		DD58E1FB20738E34001FBABA /* ColorSwitchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSwitchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,7 @@
 				DD25C73B206BBF8A00856590 /* Profile */,
 				DD3472E32064549D00566287 /* ConversationList */,
 				DD25C76E20715ABB00856590 /* Conversation */,
+				DD58E1FE20738E42001FBABA /* MultipeerConnectivity */,
 			);
 			path = FirstProjectTinkov;
 			sourceTree = "<group>";
@@ -136,6 +141,16 @@
 				DD3472E4206454C400566287 /* ConversationTableViewCell.swift */,
 			);
 			path = ConversationList;
+			sourceTree = "<group>";
+		};
+		DD58E1FE20738E42001FBABA /* MultipeerConnectivity */ = {
+			isa = PBXGroup;
+			children = (
+				DD58E1FB20738E34001FBABA /* ColorSwitchViewController.swift */,
+				DD58E1FA20738E34001FBABA /* MultipeerConnectivityService.swift */,
+			);
+			name = MultipeerConnectivity;
+			path = Themes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,8 +232,10 @@
 				DD25C73D206BBFCE00856590 /* GCDDataManager.swift in Sources */,
 				DD3472E220644CAF00566287 /* ConversationsListViewController.swift in Sources */,
 				DD25C769206E64D700856590 /* OperationDataManager.swift in Sources */,
+				DD58E1FC20738E35001FBABA /* MultipeerConnectivityService.swift in Sources */,
 				DD25C77020715E4200856590 /* MessageTableViewCell.swift in Sources */,
 				DD25C77220716BBA00856590 /* MessageModel.swift in Sources */,
+				DD58E1FD20738E35001FBABA /* ColorSwitchViewController.swift in Sources */,
 				DD3472E5206454C400566287 /* ConversationTableViewCell.swift in Sources */,
 				DD3472E02064493A00566287 /* Themes.m in Sources */,
 				DD1384C6203DD25000CFE9F5 /* AppDelegate.swift in Sources */,

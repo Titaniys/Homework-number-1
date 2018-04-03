@@ -8,7 +8,12 @@
 
 import UIKit
 
-class GCDDataManager: NSObject {
+protocol ReaderWriterProtocol {
+	func writeFile(_ inputData: Any?, toFile: String)
+	func readFile(file: String) -> Any?
+}
+
+class GCDDataManager: NSObject, ReaderWriterProtocol {
 	
 	//File system
 	let fileForPhoto = "fileForPhoto"
