@@ -14,7 +14,6 @@
         <!--Navigation Controller-->
         <scene sceneID="Nqe-Be-rvF">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wXA-GJ-Y57" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="sK8-VJ-BYN" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gzQ-zq-ncR">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
@@ -24,6 +23,7 @@
                         <segue destination="YH9-hG-Tiv" kind="relationship" relationship="rootViewController" id="Xub-zG-SUX"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wXA-GJ-Y57" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2569" y="-30"/>
         </scene>
@@ -145,17 +145,20 @@
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6du-C9-tRK">
-                                                    <rect key="frame" x="40" y="-42" width="107" height="37"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6du-C9-tRK">
+                                                    <rect key="frame" x="39" y="-62" width="108" height="57"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="Wuk-gk-mYx" firstAttribute="top" secondItem="6du-C9-tRK" secondAttribute="bottom" constant="15" id="ABy-fc-4oX"/>
                                                 <constraint firstItem="Wuk-gk-mYx" firstAttribute="top" secondItem="cX1-PV-KN5" secondAttribute="top" constant="10" id="EeK-JX-dYh"/>
+                                                <constraint firstItem="6du-C9-tRK" firstAttribute="leading" secondItem="cX1-PV-KN5" secondAttribute="leadingMargin" constant="24" id="TW4-dt-n4U"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Wuk-gk-mYx" secondAttribute="trailing" constant="20" symbolic="YES" id="Z3g-Gb-PxK"/>
                                                 <constraint firstItem="Wuk-gk-mYx" firstAttribute="leading" secondItem="cX1-PV-KN5" secondAttribute="leading" constant="15" id="Z6a-uD-g1o"/>
+                                                <constraint firstItem="6du-C9-tRK" firstAttribute="top" secondItem="cX1-PV-KN5" secondAttribute="topMargin" constant="-73" id="Z8N-6H-EnO"/>
                                                 <constraint firstAttribute="bottom" secondItem="Wuk-gk-mYx" secondAttribute="bottom" constant="10" id="roj-GZ-esu"/>
+                                                <constraint firstAttribute="trailing" secondItem="6du-C9-tRK" secondAttribute="trailing" constant="173" id="tcU-eF-oFm"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -199,24 +202,25 @@
                                     <outlet property="delegate" destination="Bst-Qf-hF6" id="pLB-5n-BZf"/>
                                 </connections>
                             </tableView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write a message..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ktN-5l-Aft">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Write a message..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aaz-fB-NfI">
                                 <rect key="frame" x="0.0" y="538" width="320" height="30"/>
-                                <nil key="textColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
-                                    <outlet property="delegate" destination="Bst-Qf-hF6" id="lYO-Li-XfZ"/>
+                                    <outlet property="delegate" destination="Bst-Qf-hF6" id="p9a-84-DWf"/>
                                 </connections>
-                            </textField>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ktN-5l-Aft" firstAttribute="trailing" secondItem="xCd-E6-wFT" secondAttribute="trailing" id="0NB-kW-NHD"/>
+                            <constraint firstItem="aaz-fB-NfI" firstAttribute="leading" secondItem="xCd-E6-wFT" secondAttribute="leading" id="6G3-4B-RRB"/>
                             <constraint firstItem="z6s-ld-gHK" firstAttribute="bottom" secondItem="xCd-E6-wFT" secondAttribute="bottom" constant="-30" id="74y-S2-f7V"/>
-                            <constraint firstItem="ktN-5l-Aft" firstAttribute="top" secondItem="z6s-ld-gHK" secondAttribute="bottom" id="7MX-Mq-mJ8"/>
-                            <constraint firstItem="ktN-5l-Aft" firstAttribute="leading" secondItem="xCd-E6-wFT" secondAttribute="leading" id="Ve2-td-Ox9"/>
-                            <constraint firstItem="ktN-5l-Aft" firstAttribute="bottom" secondItem="xCd-E6-wFT" secondAttribute="bottom" id="bIh-Gh-997"/>
+                            <constraint firstItem="aaz-fB-NfI" firstAttribute="bottom" secondItem="xCd-E6-wFT" secondAttribute="bottom" id="CE4-RR-kIW"/>
+                            <constraint firstItem="aaz-fB-NfI" firstAttribute="top" secondItem="z6s-ld-gHK" secondAttribute="bottom" id="icF-Vt-Hx7"/>
+                            <constraint firstItem="aaz-fB-NfI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="z6s-ld-gHK" secondAttribute="bottom" id="iv9-k8-m4O"/>
                             <constraint firstItem="z6s-ld-gHK" firstAttribute="trailing" secondItem="xCd-E6-wFT" secondAttribute="trailing" id="j83-U9-KIO"/>
+                            <constraint firstItem="aaz-fB-NfI" firstAttribute="trailing" secondItem="xCd-E6-wFT" secondAttribute="trailing" id="qzh-1X-7EH"/>
                             <constraint firstItem="z6s-ld-gHK" firstAttribute="leading" secondItem="xCd-E6-wFT" secondAttribute="leading" id="sg9-QA-pxN"/>
                             <constraint firstItem="z6s-ld-gHK" firstAttribute="top" secondItem="xCd-E6-wFT" secondAttribute="top" id="yqH-1d-6i2"/>
                         </constraints>
@@ -224,13 +228,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Диалог" id="XaI-yQ-30X"/>
                     <connections>
-                        <outlet property="inputTextField" destination="ktN-5l-Aft" id="8R6-od-jFg"/>
+                        <outlet property="inputMessageTextView" destination="aaz-fB-NfI" id="aC3-QS-M34"/>
                         <outlet property="tableView" destination="z6s-ld-gHK" id="zmn-va-VbX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xjw-FQ-weZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-624" y="-29"/>
+            <point key="canvasLocation" x="-624.375" y="-29.577464788732396"/>
         </scene>
         <!--Профиль-->
         <scene sceneID="8he-DW-MLo">

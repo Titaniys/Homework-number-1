@@ -10,23 +10,29 @@ import UIKit
 
 class CommunicatorManager: NSObject, CommunicatorDelegate {
 	
+	var delegateList = [CallbackProtocol]()
+	
+	//discovering
 	func didFoundUser(userID: String, userName: String?) {
-		
+		NSLog("didFoundUser %@", userID)
 	}
 	
 	func didLostUser(userID: String) {
-		
+		NSLog("didLostUser %@", userID)
 	}
 	
+	//errors
 	func failedToStartBrowsingForUser(error: Error) {
-		
+		NSLog("failedToStartBrowsingForUser")
 	}
 	
 	func failedToStartAdvertising(error: Error) {
-		
+		NSLog("failedToStartBrowsingForUser")
 	}
 	
+	//messages
 	func didReceiveMessage(text: String, fromUser: String, toUser: String) {
-		
+		NSLog("didReceiveMessage %@ fromUser %@ toUser %@", text, fromUser, toUser)
 	}
+
 }

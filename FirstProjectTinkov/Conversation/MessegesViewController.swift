@@ -8,14 +8,16 @@
 
 import UIKit
 
-class MessegesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
-
+class MessegesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, CallbackProtocol {
+	
 
 	@IBOutlet var tableView: UITableView!
-	@IBOutlet var inputTextField: UITextField!
+
+	@IBOutlet var inputMessageTextView: UITextView!
 	
 	var arrayMessages = [MessageModel]()
 	var navigationItemTitle : String?
+	
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +51,7 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 	override func viewWillDisappear(_ animated: Bool) {
 		NotificationCenter.default.removeObserver(self)
 		super.viewWillDisappear(animated)
+		
 	}
 	
 	@objc func keyboardWillShow(notification: NSNotification) {
@@ -88,17 +91,29 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 	
 	
 	
-	//MARK: UITextFieldDelegate
-	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		inputTextField.resignFirstResponder()
-		
+	//MARK: UITextViewDelegate
+	
+	func textViewDidBeginEditing(_ textView: UITextView)
+	{
+		textView.text = ""
+		textView.becomeFirstResponder()
+	}
+	
+	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+		if(text == "\n") {
+			textView.resignFirstResponder()
+			return false
+		}
 		return true
 	}
 	
-	func textFieldDidEndEditing(_ textField: UITextField) {
-		let inputText: MessageModel = MessageModel(textMessage: textField.text!, isIncomming: false)
+	func textViewDidChange(_ textView: UITextView) {
+		
+	}
+	func textViewDidEndEditing(_ textView: UITextView) {
+		let inputText: MessageModel = MessageModel(textMessage: textView.text!, isIncomming: false)
 		arrayMessages.append(inputText)
-		inputTextField.text = ""
+		inputMessageTextView.text = ""
 		tableView.reloadData()
 		tableView.updateConstraints()
 	}

@@ -9,16 +9,21 @@
 import UIKit
 
 
-class ConversationsListViewController: UITableViewController, ThemesViewControllerDelegate, CommunicatorDelegate {
-	
+class ConversationsListViewController: UITableViewController, ThemesViewControllerDelegate, CallbackProtocol {
 
+	var isFirstStart = false
 	var themesVC : ThemesViewController = ThemesViewController()
 	let multipeerCommunicator = MultipeerCommunicator()
+	let serviceDelegate = CommunicatorManager()
+	
 	var arrayUsers = [ConversationModel]()
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		multipeerCommunicator.delegate = self
+		
+		serviceDelegate.delegateList.append(self)
+		
+		multipeerCommunicator.delegate = serviceDelegate
 		
 		let one : ConversationModel = ConversationModel()
 		one.name = "Vadim"
@@ -37,6 +42,13 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 		
     }
 
+	override func viewWillAppear(_ animated: Bool) {
+		
+		if isFirstStart {
+			multipeerCommunicator.delegate?.delegateList.removeLast()
+		}
+		isFirstStart = true
+	}
 	
 	//MARK: UITableViewDelegate
 	
@@ -75,10 +87,14 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 		if  segue.identifier == "ConversationSegueIdentifier" {
 			let destination = segue.destination as? MessegesViewController
 			
+			multipeerCommunicator.delegate?.delegateList.append(destination!)
+			
 			let selectedItem : Int = (tableView.indexPathForSelectedRow?.row)!
 			destination?.navigationItemTitle = arrayUsers[selectedItem].name
 		}
 	}
+	
+	
 
 	@IBAction func didTap(_ sender: Any) {
 		let vc = self.storyboard?.instantiateViewController(withIdentifier: "ThemesViewController")
@@ -98,31 +114,10 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 		print(selectedTheme)
 	}
 	
+	//MARK: CallbackProtocol
 	
-	//MARK: CommunicatorDelegate
 	
-	//discovering
-	func didFoundUser(userID: String, userName: String?) {
-		NSLog("didFoundUser %@", userID)
-	}
 	
-	func didLostUser(userID: String) {
-		NSLog("didLostUser %@", userID)
-	}
-	
-	//errors
-	func failedToStartBrowsingForUser(error: Error) {
-		NSLog("failedToStartBrowsingForUser")
-	}
-	
-	func failedToStartAdvertising(error: Error) {
-		NSLog("failedToStartBrowsingForUser")
-	}
-	
-	//messages
-	func didReceiveMessage(text: String, fromUser: String, toUser: String) {
-		NSLog("didReceiveMessage %@ fromUser %@ toUser %@", text, fromUser, toUser)
-	}
 }
 
 

@@ -28,6 +28,7 @@
 		DD58E1FD20738E35001FBABA /* ColorSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58E1FB20738E34001FBABA /* ColorSwitchViewController.swift */; };
 		DDD63840207425A800F761C4 /* CommunicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD6383F207425A800F761C4 /* CommunicatorManager.swift */; };
 		DDD638422074269700F761C4 /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD638412074269700F761C4 /* ConversationModel.swift */; };
+		DDF7E17B2074FC450083537D /* CallbackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF7E17A2074FC450083537D /* CallbackProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		DD58E1FB20738E34001FBABA /* ColorSwitchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSwitchViewController.swift; sourceTree = "<group>"; };
 		DDD6383F207425A800F761C4 /* CommunicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicatorManager.swift; sourceTree = "<group>"; };
 		DDD638412074269700F761C4 /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
+		DDF7E17A2074FC450083537D /* CallbackProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallbackProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 				DD58E1FB20738E34001FBABA /* ColorSwitchViewController.swift */,
 				DD58E1FA20738E34001FBABA /* MultipeerConnectivityService.swift */,
 				DDD6383F207425A800F761C4 /* CommunicatorManager.swift */,
+				DDF7E17A2074FC450083537D /* CallbackProtocol.swift */,
 			);
 			name = MultipeerConnectivity;
 			path = Themes;
@@ -235,6 +238,7 @@
 			files = (
 				DDD63840207425A800F761C4 /* CommunicatorManager.swift in Sources */,
 				DD1384C8203DD25000CFE9F5 /* ProfileViewController.swift in Sources */,
+				DDF7E17B2074FC450083537D /* CallbackProtocol.swift in Sources */,
 				DD25C73A206599F800856590 /* MessegesViewController.swift in Sources */,
 				DD25C73D206BBFCE00856590 /* GCDDataManager.swift in Sources */,
 				DD3472E220644CAF00566287 /* ConversationsListViewController.swift in Sources */,
