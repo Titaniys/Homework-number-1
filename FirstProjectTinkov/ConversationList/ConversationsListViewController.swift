@@ -9,15 +9,31 @@
 import UIKit
 
 
-class ConversationsListViewController: UITableViewController, ThemesViewControllerDelegate {
+class ConversationsListViewController: UITableViewController, ThemesViewControllerDelegate, CommunicatorDelegate {
+	
 
 	var themesVC : ThemesViewController = ThemesViewController()
+	let multipeerCommunicator = MultipeerCommunicator()
+	var arrayUsers = [ConversationModel]()
 	
-	let multipeerConnectivityService = MultipeerConnectivityService()
-	
-
 	override func viewDidLoad() {
         super.viewDidLoad()
+		multipeerCommunicator.delegate = self
+		
+		let one : ConversationModel = ConversationModel()
+		one.name = "Vadim"
+		one.message = "Some message Some message Some message"
+		one.date = Date.init(timeIntervalSinceNow: 0)
+		one.online = true
+		
+		let two : ConversationModel = ConversationModel()
+		two.name = "NotVadim"
+		two.message = "Some1 message Some message Some message111"
+		two.date = Date.init(timeIntervalSinceNow: 10000)
+		two.online = true
+		
+		arrayUsers.append(one)
+		arrayUsers.append(two)
 		
     }
 
@@ -36,10 +52,11 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 		}
 	}
 	
+	
 	//MARK: UITableViewDataSource
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 10
+		return arrayUsers.count
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -47,15 +64,21 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 		let identifier = "ConversationCell"
 		
 		let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ConversationTableViewCell
-
 		
-		cell.nameLabel?.text = "Vadim"
-		cell.messageLabel?.text = "hi world"
-		cell.dateLabel?.text = "12:12"
+		cell.configureCell(arrayUsers[indexPath.row])
 		
 		return cell
 	}
 
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+		if  segue.identifier == "ConversationSegueIdentifier" {
+			let destination = segue.destination as? MessegesViewController
+			
+			let selectedItem : Int = (tableView.indexPathForSelectedRow?.row)!
+			destination?.navigationItemTitle = arrayUsers[selectedItem].name
+		}
+	}
 
 	@IBAction func didTap(_ sender: Any) {
 		let vc = self.storyboard?.instantiateViewController(withIdentifier: "ThemesViewController")
@@ -74,4 +97,33 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 	func logThemeChanging(selectedTheme: UIColor) {
 		print(selectedTheme)
 	}
+	
+	
+	//MARK: CommunicatorDelegate
+	
+	//discovering
+	func didFoundUser(userID: String, userName: String?) {
+		NSLog("didFoundUser %@", userID)
+	}
+	
+	func didLostUser(userID: String) {
+		NSLog("didLostUser %@", userID)
+	}
+	
+	//errors
+	func failedToStartBrowsingForUser(error: Error) {
+		NSLog("failedToStartBrowsingForUser")
+	}
+	
+	func failedToStartAdvertising(error: Error) {
+		NSLog("failedToStartBrowsingForUser")
+	}
+	
+	//messages
+	func didReceiveMessage(text: String, fromUser: String, toUser: String) {
+		NSLog("didReceiveMessage %@ fromUser %@ toUser %@", text, fromUser, toUser)
+	}
 }
+
+
+

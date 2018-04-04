@@ -15,6 +15,7 @@ class ColorSwitchViewController: UIViewController {
 //	
 //	@IBOutlet weak var send: UIButton!
 //	
+//	let service = MultipeerConnectivityService()
 //	
 //	
 //	override func viewDidLoad() {
@@ -50,6 +51,6 @@ class ColorSwitchViewController: UIViewController {
 ////			}
 //		}
 //	}
-//	
+	
 }
 

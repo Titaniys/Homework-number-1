@@ -26,6 +26,8 @@
 		DD3472E5206454C400566287 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3472E4206454C400566287 /* ConversationTableViewCell.swift */; };
 		DD58E1FC20738E35001FBABA /* MultipeerConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58E1FA20738E34001FBABA /* MultipeerConnectivityService.swift */; };
 		DD58E1FD20738E35001FBABA /* ColorSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58E1FB20738E34001FBABA /* ColorSwitchViewController.swift */; };
+		DDD63840207425A800F761C4 /* CommunicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD6383F207425A800F761C4 /* CommunicatorManager.swift */; };
+		DDD638422074269700F761C4 /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD638412074269700F761C4 /* ConversationModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,8 @@
 		DD3472E4206454C400566287 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		DD58E1FA20738E34001FBABA /* MultipeerConnectivityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerConnectivityService.swift; sourceTree = "<group>"; };
 		DD58E1FB20738E34001FBABA /* ColorSwitchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSwitchViewController.swift; sourceTree = "<group>"; };
+		DDD6383F207425A800F761C4 /* CommunicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicatorManager.swift; sourceTree = "<group>"; };
+		DDD638412074269700F761C4 /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,7 @@
 			children = (
 				DD3472E120644CAF00566287 /* ConversationsListViewController.swift */,
 				DD3472E4206454C400566287 /* ConversationTableViewCell.swift */,
+				DDD638412074269700F761C4 /* ConversationModel.swift */,
 			);
 			path = ConversationList;
 			sourceTree = "<group>";
@@ -148,6 +153,7 @@
 			children = (
 				DD58E1FB20738E34001FBABA /* ColorSwitchViewController.swift */,
 				DD58E1FA20738E34001FBABA /* MultipeerConnectivityService.swift */,
+				DDD6383F207425A800F761C4 /* CommunicatorManager.swift */,
 			);
 			name = MultipeerConnectivity;
 			path = Themes;
@@ -227,12 +233,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDD63840207425A800F761C4 /* CommunicatorManager.swift in Sources */,
 				DD1384C8203DD25000CFE9F5 /* ProfileViewController.swift in Sources */,
 				DD25C73A206599F800856590 /* MessegesViewController.swift in Sources */,
 				DD25C73D206BBFCE00856590 /* GCDDataManager.swift in Sources */,
 				DD3472E220644CAF00566287 /* ConversationsListViewController.swift in Sources */,
 				DD25C769206E64D700856590 /* OperationDataManager.swift in Sources */,
 				DD58E1FC20738E35001FBABA /* MultipeerConnectivityService.swift in Sources */,
+				DDD638422074269700F761C4 /* ConversationModel.swift in Sources */,
 				DD25C77020715E4200856590 /* MessageTableViewCell.swift in Sources */,
 				DD25C77220716BBA00856590 /* MessageModel.swift in Sources */,
 				DD58E1FD20738E35001FBABA /* ColorSwitchViewController.swift in Sources */,
@@ -379,11 +387,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FirstProjectTinkov/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CV.FirstProjectTinkov;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstProjectTinkov/FirstProjectTinkov-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -396,11 +408,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FirstProjectTinkov/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CV.FirstProjectTinkov;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstProjectTinkov/FirstProjectTinkov-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -35,7 +35,6 @@ class MessageTableViewCell: UITableViewCell, MessageTableViewCellConfiguration {
 		textMessageLabel.layer.masksToBounds = true
 		textMessageLabel.layer.cornerRadius = 10
 		textMessageLabel.layer.backgroundColor = UIColor.green.cgColor
-		
 	}
 	
 	func createConstraint() {

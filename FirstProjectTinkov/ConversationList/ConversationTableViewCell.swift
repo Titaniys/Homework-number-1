@@ -8,26 +8,22 @@
 
 import UIKit
 
-protocol ConversationCellConfiguration : class {
-	var name : String? {get set}
-	var message : String? {get set}
-	var date : Date? {get set}
-	var online : Bool {get set}
-	var hasUnrealMessage : Bool {get set}
-	
-}
-
 class ConversationTableViewCell: UITableViewCell {
 
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var messageLabel: UILabel!
 	@IBOutlet weak var dateLabel: UILabel!
 	
-	var name: String?
-	var message: String?
-	var date: Date?
-	var online = false
-	var hasUnrealMessage = false
+	
+	func configureCell(_ model: ConversationModel) {
+		nameLabel.text = model.name
+		messageLabel.text = model.message
+		
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "hh:mm:ss"
+		dateLabel.text = dateFormatter.string(from:model.date!)
+	}
+	
 	
 }
 

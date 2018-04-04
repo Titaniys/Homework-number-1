@@ -10,6 +10,7 @@ import UIKit
 import MultipeerConnectivity
 
 protocol CommunicatorDelegate : class {
+	
 	//discovering
 	func didFoundUser(userID: String, userName: String?)
 	func didLostUser(userID: String)
@@ -20,52 +21,54 @@ protocol CommunicatorDelegate : class {
 	
 	//messages
 	func didReceiveMessage(text: String, fromUser: String, toUser: String)
-	
 }
 
 protocol Communicator {
-	func sendMessage(string: String, to useID: String, completionHandler: ((_ success: Bool, _ error: Error?) -> ())?)
+	func sendMessage(string: String, to userID: String, completionHandler: ((_ success: Bool, _ error: Error?) -> ())?)
 	var delegate : CommunicatorDelegate? {get set}
-	var online : Bool {get set}
+	var online : Bool? {get set}
 }
 
 
-class MultipeerConnectivityService: NSObject {
-
+class MultipeerCommunicator: NSObject, Communicator {
 	
-	private let serviceType = "tinkoff-chat"
+	var online: Bool?
 	
-	private let myPeerId = MCPeerID(displayName: UIDevice.current.name)
-	private let serviceAdvertiser : MCNearbyServiceAdvertiser
-	private let serviceBrowser : MCNearbyServiceBrowser
+	let serviceType = "tinkoff-chat"
 	
-	var delegate : CommunicatorDelegate?
+	let myPeerId = MCPeerID(displayName: "iphone8+")
+	let serviceAdvertiser : MCNearbyServiceAdvertiser
+	let serviceBrowser : MCNearbyServiceBrowser
 	
-	func generateMess() -> String {
+	weak var delegate : CommunicatorDelegate?
+	
+	private func generateMess() -> String {
 		return "\(arc4random_uniform(UINT32_MAX))+\(Date.timeIntervalSinceReferenceDate)".data(using: .utf8)!.base64EncodedString()
 	}
 	
-	func send(colorName : Any) {
-		NSLog("%@", "sendName: \(colorName) to \(session.connectedPeers.count) peers")
-
+	func sendMessage(string: String, to userID: String, completionHandler:((Bool, Error?) -> ())?) {
+		
+		NSLog("%@", "send: \(string) to \(session.connectedPeers.count) peers")
+		
 		let message = self.generateMess()
 		
-		let json = ["eventType":"TextMessage","text":"Vadim Chistyakov","messageId":message]
+		let json = ["eventType":"TextMessage","text":string,"messageId":message]
 		
 		let jsonData = try? JSONSerialization.data(withJSONObject: json)
 		
 		if session.connectedPeers.count > 0 {
 			do {
 				try self.session.send(jsonData!, toPeers: session.connectedPeers, with: .reliable)
+				completionHandler!(true, nil)
 			}
 			catch let error {
 				NSLog("%@", "Error for sending: \(error)")
+				completionHandler!(true, error)
 			}
 		}
-		
 	}
-
 	
+
 	override init() {
 		self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: ["userName" : "Vadim"], serviceType: serviceType)
 		 self.serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: serviceType)
@@ -93,12 +96,11 @@ class MultipeerConnectivityService: NSObject {
 }
 
 
-
-
-extension MultipeerConnectivityService : MCNearbyServiceAdvertiserDelegate {
+extension MultipeerCommunicator : MCNearbyServiceAdvertiserDelegate {
 	
 	func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
 		NSLog("%@", "didNotStartAdvertisingPeer: \(error)")
+		self.delegate?.failedToStartAdvertising(error: error)
 	}
 	
 	
@@ -109,25 +111,28 @@ extension MultipeerConnectivityService : MCNearbyServiceAdvertiserDelegate {
 	
 }
 
-extension MultipeerConnectivityService : MCNearbyServiceBrowserDelegate {
+extension MultipeerCommunicator : MCNearbyServiceBrowserDelegate {
 	
 	func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
 		NSLog("%@", "didNotStartBrowsingForPeers: \(error)")
+		self.delegate?.failedToStartBrowsingForUser(error: error)
 	}
 	
 	func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
 		NSLog("%@", "lostPeer: \(peerID)")
+		self.delegate?.didLostUser(userID: peerID.displayName)
 	}
 	
 	func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
 		NSLog("%@", "foundPeer: \(peerID)")
 		NSLog("%@", "invitePeer: \(peerID)")
 		browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
+		self.delegate?.didFoundUser(userID: peerID.displayName, userName: info?["userName"])
 	}
 	
 }
 
-extension MultipeerConnectivityService : MCSessionDelegate {
+extension MultipeerCommunicator : MCSessionDelegate {
 	
 	
 	func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -149,13 +154,14 @@ extension MultipeerConnectivityService : MCSessionDelegate {
 	}
 	
 	func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-		NSLog("%@", "didReceiveData: \(data.count) bytes")
+
 		let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
 		if let responseJSON = responseJSON as? [String: Any] {
 			print(responseJSON)
 		}
-		let str = String(data: data, encoding: .utf8)!
-		//self.delegate?.colorChanged(manager: self, colorString: str)
+		
+		self.delegate?.didReceiveMessage(text: "textMessage", fromUser: peerID.displayName, toUser: myPeerId.displayName)
+
 	}
 	
 }

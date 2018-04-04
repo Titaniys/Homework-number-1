@@ -14,7 +14,6 @@ class MessageModel: NSObject {
 	var isIncomming : Bool
 
 	init(textMessage: String, isIncomming : Bool) {
-		//super.init()
 		self.textMessage = textMessage
 		self.isIncomming = isIncomming
 	}

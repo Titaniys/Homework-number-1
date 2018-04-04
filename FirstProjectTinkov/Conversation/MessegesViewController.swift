@@ -11,13 +11,17 @@ import UIKit
 class MessegesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
 
 
+	@IBOutlet var tableView: UITableView!
 	@IBOutlet var inputTextField: UITextField!
-	var arrayMessages = [MessageModel]()
 	
+	var arrayMessages = [MessageModel]()
+	var navigationItemTitle : String?
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-
+		self.navigationItem.title = navigationItemTitle
+		self.hideKeyboardWhenTappedAround()
+		
 		let firstModel : MessageModel = MessageModel(textMessage: "Incomming sdfsdf  sdf sdf sdf sdfxc xcv sdfdsfsdf sd sdfsdfd sdf xcv sdfdsfsdf sd sdfsdfd sdf sd", isIncomming: true)
 		let firstModel1 : MessageModel = MessageModel(textMessage: "Incomming", isIncomming: true)
 		
@@ -63,12 +67,6 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 		}
 	}
 	
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-		if touches.first != nil {
-			view.endEditing(true)
-		}
-		super.touchesBegan(touches, with: event)
-	}
 
 	//MARK: UITableViewDataSource
 	
@@ -88,10 +86,33 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 		return cell
 	}
 	
+	
+	
 	//MARK: UITextFieldDelegate
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		inputTextField.resignFirstResponder()
+		
 		return true
 	}
+	
+	func textFieldDidEndEditing(_ textField: UITextField) {
+		let inputText: MessageModel = MessageModel(textMessage: textField.text!, isIncomming: false)
+		arrayMessages.append(inputText)
+		inputTextField.text = ""
+		tableView.reloadData()
+		tableView.updateConstraints()
+	}
 
+}
+
+extension MessegesViewController {
+	func hideKeyboardWhenTappedAround() {
+		let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MessegesViewController.dismissKeyboard))
+		tap.cancelsTouchesInView = false
+		view.addGestureRecognizer(tap)
+	}
+	
+	@objc func dismissKeyboard() {
+		view.endEditing(true)
+	}
 }
