@@ -17,6 +17,7 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
     
 	var navigationItemTitle : String?
 	var user : ConversationModel!
+	var dictionaryUsers : [String : ConversationModel]!
 	
 	var multipeerCommunicator : MultipeerCommunicator!
 	
@@ -125,6 +126,8 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 	}
 
 	@IBAction func sendMessage(_ sender: Any) {
+		
+		user.date = Date.init(timeIntervalSinceNow:0)
 		OperationQueue.main.addOperation {
 			self.tableView.reloadData()
 			self.tableView.updateConstraints()
@@ -145,6 +148,7 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 	func didLostUser(userID: String) {
 		NSLog("didLostUser %@", userID)
         sendMessageButton.isEnabled = false
+		user.online = false
 	}
 	
 	//errors
@@ -162,6 +166,8 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let inputText: MessageModel = MessageModel(textMessage: text, isIncomming: true)
         user.arrayMessages.append(inputText)
+		user.date = Date.init(timeIntervalSinceNow:0)
+		
         OperationQueue.main.addOperation {
             self.tableView.reloadData()
             self.tableView.updateConstraints()

@@ -27,7 +27,7 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 
 	override func viewWillAppear(_ animated: Bool) {
         multipeerCommunicator.delegate = self
-        tableView.reloadData()
+        reloadData()
 	}
 	
     
@@ -69,7 +69,7 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 			let destination = segue.destination as? MessegesViewController
 
 			destination?.multipeerCommunicator = multipeerCommunicator
-			
+			destination?.dictionaryUsers = dictionaryUsers
 			let selectedItem : Int = (tableView.indexPathForSelectedRow?.row)!
 			destination?.user = arrayUsers[selectedItem]
 		}
@@ -96,13 +96,18 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 	}
 	
 	func reloadData()  {
+		
 		arrayUsers.removeAll()
 		for model in dictionaryUsers.values {
-			arrayUsers.append(model)
+			if model.online {
+				arrayUsers.append(model)
+			}
 		}
 		
-		tableView.reloadData()
-		tableView.updateConstraints()
+		OperationQueue.main.addOperation {
+			self.tableView.reloadData()
+			self.tableView.updateConstraints()
+		}
 	}
 	
 	
@@ -115,7 +120,6 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 		let invitedUser : ConversationModel = ConversationModel()
 		invitedUser.name = userName
 		invitedUser.peer = userID
-		invitedUser.date = Date.init(timeIntervalSinceNow:0)
 		invitedUser.online = true
 		dictionaryUsers[userID.displayName] = invitedUser
 		
@@ -142,6 +146,12 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 	//messages
 	func didReceiveMessage(text: String, fromUser: String, toUser: String) {
 		NSLog("didReceiveMessage %@ fromUser %@ toUser %@", text, fromUser, toUser)
+		
+		let inputText: MessageModel = MessageModel(textMessage: text, isIncomming: true)
+		dictionaryUsers[fromUser]?.arrayMessages.append(inputText)
+		dictionaryUsers[fromUser]?.date = Date.init(timeIntervalSinceNow:0)
+		
+		reloadData()
 	}
 	
 }

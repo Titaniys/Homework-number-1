@@ -58,10 +58,11 @@ class MessageTableViewCell: UITableViewCell, MessageTableViewCellConfiguration {
 			
 			NSLayoutConstraint.activate([trailingConstraint])
 			
-			textMessageLabel.backgroundColor = UIColor.blue
+			textMessageLabel.backgroundColor = UIColor.lightGray
+			
 		}
 		else {
-			textMessageLabel.backgroundColor = UIColor.yellow
+			textMessageLabel.backgroundColor = UIColor.yellow.withAlphaComponent(0.8)
 			
 			let leadingConstraint = NSLayoutConstraint(item: textMessageLabel,
 													   attribute: NSLayoutAttribute.leading,
