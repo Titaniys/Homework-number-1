@@ -16,15 +16,22 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 	var themesVC : ThemesViewController = ThemesViewController()
 	let multipeerCommunicator = MultipeerCommunicator()
 	
+	var dictionaryUsers = [String : ConversationModel]()
 	var arrayUsers = [ConversationModel]()
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
     }
+	
 
 	override func viewWillAppear(_ animated: Bool) {
         multipeerCommunicator.delegate = self
+		
+//		for model in dictionaryUsers.values {
+//			arrayUsers.append(model)
+//		}
+		
         tableView.reloadData()
 	}
 	
@@ -100,10 +107,16 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 		NSLog("didFoundUser %@", userID)
 		
 		let invitedUser : ConversationModel = ConversationModel()
-		invitedUser.name = userID
+		invitedUser.name = userName
+		invitedUser.peer = userID
 		invitedUser.date = Date.init(timeIntervalSinceNow:0)
 		invitedUser.online = true
-		arrayUsers.append(invitedUser)
+		dictionaryUsers[userName!] = invitedUser
+		
+		arrayUsers.removeAll()
+		for model in dictionaryUsers.values {
+			arrayUsers.append(model)
+		}
 		
 		tableView.reloadData()
 		tableView.updateConstraints()

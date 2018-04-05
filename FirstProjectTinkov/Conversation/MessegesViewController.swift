@@ -23,7 +23,7 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = user.name?.displayName
+        self.navigationItem.title = user.name
         
 		self.hideKeyboardWhenTappedAround()
 		
@@ -126,7 +126,7 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
             self.tableView.updateConstraints()
         }
         
-        multipeerCommunicator.sendMessage(string: textView.text, to:user.name! ) { (Bool, Error) in
+		multipeerCommunicator.sendMessage(string: textView.text, to:user.peer! ) { (Bool, Error) in
 			
 		}
 		inputMessageTextView.text = ""

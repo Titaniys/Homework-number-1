@@ -10,7 +10,9 @@ import UIKit
 import MultipeerConnectivity
 
 protocol ConversationCellConfiguration : class {
-	var name : MCPeerID? {get set}
+	
+	var name : String? {get set}
+	var peer : MCPeerID? {get set}
 	var lastMessage : String? {get set}
 	var date : Date? {get set}
 	var online : Bool {get set}
@@ -22,7 +24,8 @@ protocol ConversationCellConfiguration : class {
 
 class ConversationModel: NSObject, ConversationCellConfiguration {
 	
-	var name: MCPeerID?
+	var name: String?
+	var peer: MCPeerID?
 	var lastMessage: String?
 	var date: Date?
 	var online: Bool = false
