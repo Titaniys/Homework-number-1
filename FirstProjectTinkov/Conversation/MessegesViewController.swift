@@ -107,13 +107,13 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 		textView.becomeFirstResponder()
 	}
 	
-	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-		if(text == "\n") {
-			textView.resignFirstResponder()
-			return false
-		}
-		return true
-	}
+//	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//		if(text == "\n") {
+//			textView.resignFirstResponder()
+//			return false
+//		}
+//		return true
+//	}
 	
 	func textViewDidChange(_ textView: UITextView) {
 		
@@ -121,18 +121,20 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 	func textViewDidEndEditing(_ textView: UITextView) {
 		let inputText: MessageModel = MessageModel(textMessage: textView.text!, isIncomming: false)
 		user.arrayMessages.append(inputText)
-        OperationQueue.main.addOperation {
-            self.tableView.reloadData()
-            self.tableView.updateConstraints()
-        }
-        
-		multipeerCommunicator.sendMessage(string: textView.text, to:user.peer! ) { (Bool, Error) in
+		textView.resignFirstResponder()
+	}
+
+	@IBAction func sendMessage(_ sender: Any) {
+		OperationQueue.main.addOperation {
+			self.tableView.reloadData()
+			self.tableView.updateConstraints()
+		}
+		
+		multipeerCommunicator.sendMessage(string: inputMessageTextView.text, to:user.peer! ) { (Bool, Error) in
 			
 		}
 		inputMessageTextView.text = ""
-		
 	}
-
 	//MARK: CallbackProtocol
 	
 	//discovering

@@ -27,11 +27,6 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 
 	override func viewWillAppear(_ animated: Bool) {
         multipeerCommunicator.delegate = self
-		
-//		for model in dictionaryUsers.values {
-//			arrayUsers.append(model)
-//		}
-		
         tableView.reloadData()
 	}
 	
@@ -100,6 +95,17 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 		print(selectedTheme)
 	}
 	
+	func reloadData()  {
+		arrayUsers.removeAll()
+		for model in dictionaryUsers.values {
+			arrayUsers.append(model)
+		}
+		
+		tableView.reloadData()
+		tableView.updateConstraints()
+	}
+	
+	
 	//MARK: CommunicatorDelegate
 	
 	//discovering
@@ -111,19 +117,17 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 		invitedUser.peer = userID
 		invitedUser.date = Date.init(timeIntervalSinceNow:0)
 		invitedUser.online = true
-		dictionaryUsers[userName!] = invitedUser
+		dictionaryUsers[userID.displayName] = invitedUser
 		
-		arrayUsers.removeAll()
-		for model in dictionaryUsers.values {
-			arrayUsers.append(model)
-		}
-		
-		tableView.reloadData()
-		tableView.updateConstraints()
+		reloadData()
 	}
 	
 	func didLostUser(userID: String) {
 		NSLog("didLostUser %@", userID)
+		dictionaryUsers[userID] = nil
+		
+		reloadData()
+		
 	}
 	
 	//errors
