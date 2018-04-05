@@ -16,8 +16,12 @@ class ConversationTableViewCell: UITableViewCell {
 	
 	
 	func configureCell(_ model: ConversationModel) {
-		nameLabel.text = model.name
-		messageLabel.text = model.message
+		nameLabel.text = model.name?.displayName
+        let lastObject = model.arrayMessages.last
+        if (lastObject != nil) {
+            messageLabel.text = lastObject?.textMessage
+        }
+		messageLabel.text = "Пока нет сообщений..."
 		
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "hh:mm:ss"

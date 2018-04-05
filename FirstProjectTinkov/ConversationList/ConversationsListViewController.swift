@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
 
 class ConversationsListViewController: UITableViewController, ThemesViewControllerDelegate, CommunicatorDelegate {
@@ -20,22 +21,14 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
-		multipeerCommunicator.delegate = self
-		
-		let one : ConversationModel = ConversationModel()
-		one.name = "Vadim"
-		one.message = "Some message Some message Some message"
-		one.date = Date.init(timeIntervalSinceNow: 0)
-		one.online = true
-		
-		arrayUsers.append(one)
-		
     }
 
 	override func viewWillAppear(_ animated: Bool) {
-
+        multipeerCommunicator.delegate = self
+        tableView.reloadData()
 	}
 	
+    
 	//MARK: UITableViewDelegate
 	
 	override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -76,7 +69,7 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 			destination?.multipeerCommunicator = multipeerCommunicator
 			
 			let selectedItem : Int = (tableView.indexPathForSelectedRow?.row)!
-			destination?.navigationItemTitle = arrayUsers[selectedItem].name
+			destination?.user = arrayUsers[selectedItem]
 		}
 	}
 	
@@ -103,11 +96,11 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 	//MARK: CommunicatorDelegate
 	
 	//discovering
-	func didFoundUser(userID: String, userName: String?) {
+	func didFoundUser(userID: MCPeerID, userName: String?) {
 		NSLog("didFoundUser %@", userID)
 		
 		let invitedUser : ConversationModel = ConversationModel()
-		invitedUser.name = userName
+		invitedUser.name = userID
 		invitedUser.date = Date.init(timeIntervalSinceNow:0)
 		invitedUser.online = true
 		arrayUsers.append(invitedUser)

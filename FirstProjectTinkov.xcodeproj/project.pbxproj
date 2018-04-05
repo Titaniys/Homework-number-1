@@ -25,10 +25,8 @@
 		DD3472E220644CAF00566287 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3472E120644CAF00566287 /* ConversationsListViewController.swift */; };
 		DD3472E5206454C400566287 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3472E4206454C400566287 /* ConversationTableViewCell.swift */; };
 		DD58E1FC20738E35001FBABA /* MultipeerConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58E1FA20738E34001FBABA /* MultipeerConnectivityService.swift */; };
-		DD58E1FD20738E35001FBABA /* ColorSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58E1FB20738E34001FBABA /* ColorSwitchViewController.swift */; };
 		DDD638422074269700F761C4 /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD638412074269700F761C4 /* ConversationModel.swift */; };
 		DDF7E17E20753F290083537D /* ModelForUser.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDF7E17C20753F290083537D /* ModelForUser.xcdatamodeld */; };
-		DDF7E1802075679D0083537D /* MessageTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDF7E17F2075679D0083537D /* MessageTextView.xib */; };
 		DDF7E1842075731A0083537D /* whatsapp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DDF7E1832075731A0083537D /* whatsapp.jpg */; };
 /* End PBXBuildFile section */
 
@@ -56,10 +54,8 @@
 		DD3472E120644CAF00566287 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		DD3472E4206454C400566287 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		DD58E1FA20738E34001FBABA /* MultipeerConnectivityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerConnectivityService.swift; sourceTree = "<group>"; };
-		DD58E1FB20738E34001FBABA /* ColorSwitchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSwitchViewController.swift; sourceTree = "<group>"; };
 		DDD638412074269700F761C4 /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		DDF7E17D20753F290083537D /* ModelForUser.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ModelForUser.xcdatamodel; sourceTree = "<group>"; };
-		DDF7E17F2075679D0083537D /* MessageTextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageTextView.xib; sourceTree = "<group>"; };
 		DDF7E1832075731A0083537D /* whatsapp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = whatsapp.jpg; path = icon/whatsapp.jpg; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -139,7 +135,6 @@
 				DD25C739206599F800856590 /* MessegesViewController.swift */,
 				DD25C76F20715E4200856590 /* MessageTableViewCell.swift */,
 				DD25C77120716BBA00856590 /* MessageModel.swift */,
-				DDF7E17F2075679D0083537D /* MessageTextView.xib */,
 				DDF7E1832075731A0083537D /* whatsapp.jpg */,
 			);
 			path = Conversation;
@@ -158,7 +153,6 @@
 		DD58E1FE20738E42001FBABA /* MultipeerConnectivity */ = {
 			isa = PBXGroup;
 			children = (
-				DD58E1FB20738E34001FBABA /* ColorSwitchViewController.swift */,
 				DD58E1FA20738E34001FBABA /* MultipeerConnectivityService.swift */,
 			);
 			name = MultipeerConnectivity;
@@ -229,7 +223,6 @@
 				DD1E4360204326E900C18C89 /* Main.storyboard in Resources */,
 				DD25C765206D909600856590 /* placeholder.png in Resources */,
 				DD1384CD203DD25000CFE9F5 /* Assets.xcassets in Resources */,
-				DDF7E1802075679D0083537D /* MessageTextView.xib in Resources */,
 				DDF7E1842075731A0083537D /* whatsapp.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,7 +244,6 @@
 				DDF7E17E20753F290083537D /* ModelForUser.xcdatamodeld in Sources */,
 				DD25C77020715E4200856590 /* MessageTableViewCell.swift in Sources */,
 				DD25C77220716BBA00856590 /* MessageModel.swift in Sources */,
-				DD58E1FD20738E35001FBABA /* ColorSwitchViewController.swift in Sources */,
 				DD3472E5206454C400566287 /* ConversationTableViewCell.swift in Sources */,
 				DD3472E02064493A00566287 /* Themes.m in Sources */,
 				DD1384C6203DD25000CFE9F5 /* AppDelegate.swift in Sources */,
@@ -397,9 +389,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2X3PCQX98G;
 				INFOPLIST_FILE = FirstProjectTinkov/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CV.FirstProjectTinkov;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -407,7 +399,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstProjectTinkov/FirstProjectTinkov-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -418,16 +410,16 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2X3PCQX98G;
 				INFOPLIST_FILE = FirstProjectTinkov/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CV.FirstProjectTinkov;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstProjectTinkov/FirstProjectTinkov-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

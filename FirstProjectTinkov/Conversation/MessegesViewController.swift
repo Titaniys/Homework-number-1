@@ -7,23 +7,24 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
 class MessegesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, CommunicatorDelegate{
 	
 	@IBOutlet var tableView: UITableView!
-
 	@IBOutlet var inputMessageTextView: UITextView!
-	
-	var arrayMessages = [MessageModel]()
+    @IBOutlet var sendMessageButton: UIButton!
+    
 	var navigationItemTitle : String?
-	var userID : String?
+	var user : ConversationModel!
 	
 	var multipeerCommunicator : MultipeerCommunicator!
 	
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		self.navigationItem.title = navigationItemTitle
+        self.navigationItem.title = user.name?.displayName
+        
 		self.hideKeyboardWhenTappedAround()
 		
 		let backgroundImage = UIImage(named: "whatsapp.jpg")
@@ -32,10 +33,6 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 		self.tableView.backgroundView = imageView
 		
 		multipeerCommunicator?.delegate = self
-		
-		let threeModel : MessageModel = MessageModel(textMessage: "textMessage", isIncomming: false)
-		
-		arrayMessages = [threeModel]
 		
     }
 	
@@ -85,17 +82,17 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 	//MARK: UITableViewDataSource
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return arrayMessages.count
+        return user.arrayMessages.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
-		let cellIdentifier = arrayMessages[indexPath.row].isIncomming ? "incomingCell" : "outgoingCell"
+		let cellIdentifier = user.arrayMessages[indexPath.row].isIncomming ? "incomingCell" : "outgoingCell"
 		
 		let cell: MessageTableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MessageTableViewCell
 		
-		cell.textMessageLabel?.text = arrayMessages[indexPath.row].textMessage
-		cell.isIncomming = arrayMessages[indexPath.row].isIncomming
+		cell.textMessageLabel?.text = user.arrayMessages[indexPath.row].textMessage
+		cell.isIncomming = user.arrayMessages[indexPath.row].isIncomming
 		
 		return cell
 	}
@@ -123,11 +120,13 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 	}
 	func textViewDidEndEditing(_ textView: UITextView) {
 		let inputText: MessageModel = MessageModel(textMessage: textView.text!, isIncomming: false)
-		arrayMessages.append(inputText)
-		tableView.reloadData()
-		tableView.updateConstraints()
-		
-		multipeerCommunicator.sendMessage(string: textView.text, to: "Vadim") { (Bool, Error) in
+		user.arrayMessages.append(inputText)
+        OperationQueue.main.addOperation {
+            self.tableView.reloadData()
+            self.tableView.updateConstraints()
+        }
+        
+        multipeerCommunicator.sendMessage(string: textView.text, to:user.name! ) { (Bool, Error) in
 			
 		}
 		inputMessageTextView.text = ""
@@ -137,12 +136,13 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 	//MARK: CallbackProtocol
 	
 	//discovering
-	func didFoundUser(userID: String, userName: String?) {
-		NSLog("didFoundUser %@", userID)
+	func didFoundUser(userID: MCPeerID, userName: String?) {
+		NSLog("didFoundUser %@", userID.displayName)
 	}
 	
 	func didLostUser(userID: String) {
 		NSLog("didLostUser %@", userID)
+        sendMessageButton.isEnabled = false
 	}
 	
 	//errors
@@ -157,6 +157,13 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 	//messages
 	func didReceiveMessage(text: String, fromUser: String, toUser: String) {
 		NSLog("didReceiveMessage %@ fromUser %@ toUser %@", text, fromUser, toUser)
+        
+        let inputText: MessageModel = MessageModel(textMessage: text, isIncomming: true)
+        user.arrayMessages.append(inputText)
+        OperationQueue.main.addOperation {
+            self.tableView.reloadData()
+            self.tableView.updateConstraints()
+        }
 	}
 }
 
