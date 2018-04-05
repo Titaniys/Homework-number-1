@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import CoreData
 
-
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, NSFetchedResultsControllerDelegate {
 
 	
 	@IBOutlet var activityIndicator: UIActivityIndicatorView!
@@ -163,35 +163,35 @@ class ProfileViewController: UIViewController {
 		
 		switch sender.tag {
 		case 1:
-			activityIndicator.isHidden = false
-			activityIndicator.startAnimating()
-			
-			fotoButton.isEnabled = false
-			buttonGCD.isEnabled = false
-			buttonOperation.isEnabled = false
-			nameTextField.isEnabled = false
-			descriptTextView.isEditable = false
-			
-			let inputModel = DataModelOfUser()
-			inputModel.imagePhoto = profileImage.image
-			inputModel.textName = nameTextField.text
-			inputModel.textDescript = descriptTextView.text
-			
-			let queue = DispatchQueue.global(qos: .utility)
-			queue.async {
-				self.readerWriterGCD.writeFiles(inputModel)
-				DispatchQueue.main.async {
-					self.activityIndicator.stopAnimating()
-					self.buttonGCD.isEnabled = true
-					self.buttonOperation.isEnabled = true
-					
-					let alert = UIAlertController(title: "Данные сохранены!", message: "", preferredStyle: UIAlertControllerStyle.alert)
-					alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: { action in
-					}))
-					self.present(alert, animated: true, completion: nil)
-					
-					}
-				}
+//			activityIndicator.isHidden = false
+//			activityIndicator.startAnimating()
+//
+//			fotoButton.isEnabled = false
+//			buttonGCD.isEnabled = false
+//			buttonOperation.isEnabled = false
+//			nameTextField.isEnabled = false
+//			descriptTextView.isEditable = false
+//
+//			let inputModel = DataModelOfUser()
+//			inputModel.imagePhoto = profileImage.image
+//			inputModel.textName = nameTextField.text
+//			inputModel.textDescript = descriptTextView.text
+//
+//			let queue = DispatchQueue.global(qos: .utility)
+//			queue.async {
+//				self.readerWriterGCD.writeFiles(inputModel)
+//				DispatchQueue.main.async {
+//					self.activityIndicator.stopAnimating()
+//					self.buttonGCD.isEnabled = true
+//					self.buttonOperation.isEnabled = true
+//
+//					let alert = UIAlertController(title: "Данные сохранены!", message: "", preferredStyle: UIAlertControllerStyle.alert)
+//					alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: { action in
+//					}))
+//					self.present(alert, animated: true, completion: nil)
+//
+//					}
+//				}
 			
 			break
 		case 2:
@@ -257,6 +257,8 @@ class ProfileViewController: UIViewController {
 		
 		self.present(imagePicker, animated: true, completion:nil)
 	}
+	
+	//MARK: CoreData
 	
 }
 

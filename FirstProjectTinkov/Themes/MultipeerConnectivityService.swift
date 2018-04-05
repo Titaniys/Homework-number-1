@@ -11,8 +11,6 @@ import MultipeerConnectivity
 
 protocol CommunicatorDelegate : class {
 	
-	var delegateList : [CallbackProtocol] {get set}
-	
 	//discovering
 	func didFoundUser(userID: String, userName: String?)
 	func didLostUser(userID: String)

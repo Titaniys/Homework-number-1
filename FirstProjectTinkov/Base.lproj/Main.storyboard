@@ -203,24 +203,34 @@
                                 </connections>
                             </tableView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Write a message..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aaz-fB-NfI">
-                                <rect key="frame" x="0.0" y="538" width="320" height="30"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="538" width="290" height="30"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
                                     <outlet property="delegate" destination="Bst-Qf-hF6" id="p9a-84-DWf"/>
                                 </connections>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WOR-hS-tw8">
+                                <rect key="frame" x="290" y="538" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="HAw-Nd-nNG"/>
+                                    <constraint firstAttribute="width" constant="30" id="LKL-2g-J5p"/>
+                                </constraints>
+                                <state key="normal" image="iconMessage"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="aaz-fB-NfI" firstAttribute="leading" secondItem="xCd-E6-wFT" secondAttribute="leading" id="6G3-4B-RRB"/>
                             <constraint firstItem="z6s-ld-gHK" firstAttribute="bottom" secondItem="xCd-E6-wFT" secondAttribute="bottom" constant="-30" id="74y-S2-f7V"/>
                             <constraint firstItem="aaz-fB-NfI" firstAttribute="bottom" secondItem="xCd-E6-wFT" secondAttribute="bottom" id="CE4-RR-kIW"/>
+                            <constraint firstItem="WOR-hS-tw8" firstAttribute="leading" secondItem="aaz-fB-NfI" secondAttribute="trailing" id="GNs-Qy-MUk"/>
+                            <constraint firstItem="WOR-hS-tw8" firstAttribute="bottom" secondItem="xCd-E6-wFT" secondAttribute="bottom" id="aWe-BB-0Nd"/>
+                            <constraint firstItem="aaz-fB-NfI" firstAttribute="leading" secondItem="xCd-E6-wFT" secondAttribute="leading" id="cfo-0f-cbu"/>
+                            <constraint firstItem="WOR-hS-tw8" firstAttribute="trailing" secondItem="xCd-E6-wFT" secondAttribute="trailing" id="fEF-R1-Vn4"/>
                             <constraint firstItem="aaz-fB-NfI" firstAttribute="top" secondItem="z6s-ld-gHK" secondAttribute="bottom" id="icF-Vt-Hx7"/>
-                            <constraint firstItem="aaz-fB-NfI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="z6s-ld-gHK" secondAttribute="bottom" id="iv9-k8-m4O"/>
                             <constraint firstItem="z6s-ld-gHK" firstAttribute="trailing" secondItem="xCd-E6-wFT" secondAttribute="trailing" id="j83-U9-KIO"/>
-                            <constraint firstItem="aaz-fB-NfI" firstAttribute="trailing" secondItem="xCd-E6-wFT" secondAttribute="trailing" id="qzh-1X-7EH"/>
                             <constraint firstItem="z6s-ld-gHK" firstAttribute="leading" secondItem="xCd-E6-wFT" secondAttribute="leading" id="sg9-QA-pxN"/>
                             <constraint firstItem="z6s-ld-gHK" firstAttribute="top" secondItem="xCd-E6-wFT" secondAttribute="top" id="yqH-1d-6i2"/>
                         </constraints>
@@ -477,6 +487,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="iconMessage" width="128" height="128"/>
         <image name="placeholder-user" width="600" height="600"/>
         <image name="slr-camera-2-xxl" width="256" height="256"/>
     </resources>

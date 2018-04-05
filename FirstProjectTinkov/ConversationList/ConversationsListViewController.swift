@@ -9,21 +9,18 @@
 import UIKit
 
 
-class ConversationsListViewController: UITableViewController, ThemesViewControllerDelegate, CallbackProtocol {
+class ConversationsListViewController: UITableViewController, ThemesViewControllerDelegate, CommunicatorDelegate {
 
 	var isFirstStart = false
 	var themesVC : ThemesViewController = ThemesViewController()
 	let multipeerCommunicator = MultipeerCommunicator()
-	let serviceDelegate = CommunicatorManager()
 	
 	var arrayUsers = [ConversationModel]()
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
-		serviceDelegate.delegateList.append(self)
-		
-		multipeerCommunicator.delegate = serviceDelegate
+		multipeerCommunicator.delegate = self
 		
 		let one : ConversationModel = ConversationModel()
 		one.name = "Vadim"
@@ -31,23 +28,12 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 		one.date = Date.init(timeIntervalSinceNow: 0)
 		one.online = true
 		
-		let two : ConversationModel = ConversationModel()
-		two.name = "NotVadim"
-		two.message = "Some1 message Some message Some message111"
-		two.date = Date.init(timeIntervalSinceNow: 10000)
-		two.online = true
-		
 		arrayUsers.append(one)
-		arrayUsers.append(two)
 		
     }
 
 	override func viewWillAppear(_ animated: Bool) {
-		
-		if isFirstStart {
-			multipeerCommunicator.delegate?.delegateList.removeLast()
-		}
-		isFirstStart = true
+
 	}
 	
 	//MARK: UITableViewDelegate
@@ -86,8 +72,8 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 
 		if  segue.identifier == "ConversationSegueIdentifier" {
 			let destination = segue.destination as? MessegesViewController
-			
-			multipeerCommunicator.delegate?.delegateList.append(destination!)
+
+			destination?.multipeerCommunicator = multipeerCommunicator
 			
 			let selectedItem : Int = (tableView.indexPathForSelectedRow?.row)!
 			destination?.navigationItemTitle = arrayUsers[selectedItem].name
@@ -114,9 +100,39 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 		print(selectedTheme)
 	}
 	
-	//MARK: CallbackProtocol
+	//MARK: CommunicatorDelegate
 	
+	//discovering
+	func didFoundUser(userID: String, userName: String?) {
+		NSLog("didFoundUser %@", userID)
+		
+		let invitedUser : ConversationModel = ConversationModel()
+		invitedUser.name = userName
+		invitedUser.date = Date.init(timeIntervalSinceNow:0)
+		invitedUser.online = true
+		arrayUsers.append(invitedUser)
+		
+		tableView.reloadData()
+		tableView.updateConstraints()
+	}
 	
+	func didLostUser(userID: String) {
+		NSLog("didLostUser %@", userID)
+	}
+	
+	//errors
+	func failedToStartBrowsingForUser(error: Error) {
+		NSLog("failedToStartBrowsingForUser")
+	}
+	
+	func failedToStartAdvertising(error: Error) {
+		NSLog("failedToStartBrowsingForUser")
+	}
+	
+	//messages
+	func didReceiveMessage(text: String, fromUser: String, toUser: String) {
+		NSLog("didReceiveMessage %@ fromUser %@ toUser %@", text, fromUser, toUser)
+	}
 	
 }
 

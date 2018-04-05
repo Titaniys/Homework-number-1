@@ -8,15 +8,17 @@
 
 import UIKit
 
-class MessegesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, CallbackProtocol {
+class MessegesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, CommunicatorDelegate{
 	
-
 	@IBOutlet var tableView: UITableView!
 
 	@IBOutlet var inputMessageTextView: UITextView!
 	
 	var arrayMessages = [MessageModel]()
 	var navigationItemTitle : String?
+	var userID : String?
+	
+	var multipeerCommunicator : MultipeerCommunicator!
 	
 	
     override func viewDidLoad() {
@@ -24,13 +26,16 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 		self.navigationItem.title = navigationItemTitle
 		self.hideKeyboardWhenTappedAround()
 		
-		let firstModel : MessageModel = MessageModel(textMessage: "Incomming sdfsdf  sdf sdf sdf sdfxc xcv sdfdsfsdf sd sdfsdfd sdf xcv sdfdsfsdf sd sdfsdfd sdf sd", isIncomming: true)
-		let firstModel1 : MessageModel = MessageModel(textMessage: "Incomming", isIncomming: true)
+		let backgroundImage = UIImage(named: "whatsapp.jpg")
+		let imageView = UIImageView(image: backgroundImage)
+		imageView.contentMode = .scaleAspectFill
+		self.tableView.backgroundView = imageView
 		
-		let secondModel : MessageModel = MessageModel(textMessage: "textMess ageLabel textMe ssageLabel textMessageLabel textMessageLabel textMessageLabel textMess ageLabel textMe ssageLabel textMessageLabel textMessageLabel textMessageLabel textMessageLabel textMessageLabel", isIncomming: false)
+		multipeerCommunicator?.delegate = self
+		
 		let threeModel : MessageModel = MessageModel(textMessage: "textMessage", isIncomming: false)
 		
-		arrayMessages = [firstModel, secondModel, threeModel, firstModel1]
+		arrayMessages = [threeModel]
 		
     }
 	
@@ -70,7 +75,13 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 		}
 	}
 	
-
+	//MARK: UITableViewDelegate
+	
+	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+		cell.backgroundColor = .clear
+		
+	}
+	
 	//MARK: UITableViewDataSource
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -113,11 +124,40 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 	func textViewDidEndEditing(_ textView: UITextView) {
 		let inputText: MessageModel = MessageModel(textMessage: textView.text!, isIncomming: false)
 		arrayMessages.append(inputText)
-		inputMessageTextView.text = ""
 		tableView.reloadData()
 		tableView.updateConstraints()
+		
+		multipeerCommunicator.sendMessage(string: textView.text, to: "Vadim") { (Bool, Error) in
+			
+		}
+		inputMessageTextView.text = ""
+		
 	}
 
+	//MARK: CallbackProtocol
+	
+	//discovering
+	func didFoundUser(userID: String, userName: String?) {
+		NSLog("didFoundUser %@", userID)
+	}
+	
+	func didLostUser(userID: String) {
+		NSLog("didLostUser %@", userID)
+	}
+	
+	//errors
+	func failedToStartBrowsingForUser(error: Error) {
+		NSLog("failedToStartBrowsingForUser")
+	}
+	
+	func failedToStartAdvertising(error: Error) {
+		NSLog("failedToStartBrowsingForUser")
+	}
+	
+	//messages
+	func didReceiveMessage(text: String, fromUser: String, toUser: String) {
+		NSLog("didReceiveMessage %@ fromUser %@ toUser %@", text, fromUser, toUser)
+	}
 }
 
 extension MessegesViewController {
