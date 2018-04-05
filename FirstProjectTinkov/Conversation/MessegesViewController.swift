@@ -17,7 +17,6 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
     
 	var navigationItemTitle : String?
 	var user : ConversationModel!
-	var dictionaryUsers : [String : ConversationModel]!
 	
 	var multipeerCommunicator : MultipeerCommunicator!
 	

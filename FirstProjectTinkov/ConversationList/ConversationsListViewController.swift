@@ -69,7 +69,6 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 			let destination = segue.destination as? MessegesViewController
 
 			destination?.multipeerCommunicator = multipeerCommunicator
-			destination?.dictionaryUsers = dictionaryUsers
 			let selectedItem : Int = (tableView.indexPathForSelectedRow?.row)!
 			destination?.user = arrayUsers[selectedItem]
 		}
@@ -103,6 +102,8 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 				arrayUsers.append(model)
 			}
 		}
+		arrayUsers.sort {$0.name! < $1.name!}
+		arrayUsers.sort {$0.date! < $1.date!}
 		
 		OperationQueue.main.addOperation {
 			self.tableView.reloadData()
