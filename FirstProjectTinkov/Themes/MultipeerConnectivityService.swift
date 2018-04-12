@@ -36,7 +36,7 @@ class MultipeerCommunicator: NSObject, Communicator {
 	
 	let serviceType = "tinkoff-chat"
 	
-	let myPeerId = MCPeerID(displayName: "displayName imac")
+    let myPeerId = MCPeerID(displayName: (UIDevice.current.identifierForVendor?.uuidString)!)
 	let serviceAdvertiser : MCNearbyServiceAdvertiser
 	let serviceBrowser : MCNearbyServiceBrowser
 	
@@ -49,9 +49,20 @@ class MultipeerCommunicator: NSObject, Communicator {
     }()
     
 	override init() {
-		self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: ["userName" : "Imac"], serviceType: serviceType)
-		 self.serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: serviceType)
-		super.init()
+        
+        var userName : String!
+        // Чтение с помощью GCD
+        let queue = DispatchQueue.global(qos: .utility)
+        queue.sync {
+            let readerWriterGCD = GCDDataManager()
+            let outputModel : DataModelOfUser = readerWriterGCD.readFiles()
+            userName = outputModel.textName
+        }
+        
+        self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: ["userName" : userName!], serviceType: serviceType)
+        self.serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: serviceType)
+		
+        super.init()
 		
 		self.serviceAdvertiser.delegate = self
 		self.serviceAdvertiser.startAdvertisingPeer()
@@ -71,9 +82,9 @@ class MultipeerCommunicator: NSObject, Communicator {
         
         NSLog("%@", "send: \(string) to \(userID) peers")
         
-        let message = self.generateMess()
+        let messageId = self.generateMess()
         
-        let json = ["eventType":"TextMessage","text":string,"messageId":message]
+        let json = ["eventType":"TextMessage","text":string,"messageId":messageId]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         

@@ -103,7 +103,6 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 			}
 		}
 		arrayUsers.sort {$0.name! < $1.name!}
-		arrayUsers.sort {$0.date! < $1.date!}
 		
 		OperationQueue.main.addOperation {
 			self.tableView.reloadData()
