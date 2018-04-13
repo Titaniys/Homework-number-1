@@ -17,14 +17,14 @@ class ProfileViewController: UIViewController, NSFetchedResultsControllerDelegat
 	@IBOutlet var descriptTextView: UITextView!
 	@IBOutlet weak var fotoButton: UIButton!
 	
-	@IBOutlet var buttonGCD: UIButton!
-	@IBOutlet var buttonOperation: UIButton!
+	@IBOutlet var buttonEditProfile: UIButton!
 	@IBOutlet weak var profileImage: UIImageView!
 	
 	let readerWriterGCD = GCDDataManager()
 	var readerWriterOperation = OperationDataManager()
 	
-	var oldModel : DataModelOfUser?
+	var oldModel : UserModel?
+	let storageManager = StorageManager()
 	
 	
 	override func viewDidLoad() {
@@ -35,7 +35,7 @@ class ProfileViewController: UIViewController, NSFetchedResultsControllerDelegat
 		descriptTextView.delegate = self
 
 		setupUI()
-		
+		setupData()
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -80,56 +80,29 @@ class ProfileViewController: UIViewController, NSFetchedResultsControllerDelegat
 		fotoButton.layer.cornerRadius = 15
 		fotoButton.isEnabled = false
 		
-		buttonGCD.tag = 1
-		buttonGCD.layer.cornerRadius = 10
-		buttonGCD.layer.borderWidth = 2
-		buttonGCD.layer.borderColor = UIColor.black.cgColor
-		buttonGCD.isEnabled = false
-		
-		buttonOperation.tag = 2
-		buttonOperation.layer.cornerRadius = 10
-		buttonOperation.layer.borderWidth = 2
-		buttonOperation.layer.borderColor = UIColor.black.cgColor
-		buttonOperation.isEnabled = false
+		buttonEditProfile.tag = 2
+		buttonEditProfile.layer.cornerRadius = 10
+		buttonEditProfile.layer.borderWidth = 2
+		buttonEditProfile.layer.borderColor = UIColor.black.cgColor
+		buttonEditProfile.isEnabled = false
 		
 		profileImage.clipsToBounds = true
 		profileImage.layer.cornerRadius = 15
 		
 		nameTextField.isEnabled = false
 		descriptTextView.isEditable = false
+		activityIndicator.stopAnimating()
 		
-		// Чтение с помощью Operation
-		readerWriterOperation.isReading = true
-		readerWriterOperation.completionBlock = {
-			OperationQueue.main.addOperation {
-				self.nameTextField.text = self.readerWriterOperation.outputModel?.textName
-				self.descriptTextView.text = self.readerWriterOperation.outputModel?.textDescript
-				self.profileImage.image = self.readerWriterOperation.outputModel?.imagePhoto
-				self.oldModel = self.readerWriterOperation.outputModel
-			}
-		}
+	}
+	
+	func setupData() {
 		
-		let readQueue = OperationQueue()
-		readQueue.addOperation(readerWriterOperation)
-		readQueue.waitUntilAllOperationsAreFinished()
-
-
-		// Чтение с помощью GCD
-		let queue = DispatchQueue.global(qos: .utility)
-		activityIndicator.isHidden = false
-		activityIndicator.startAnimating()
-		queue.async {
-			let outputModel : DataModelOfUser = self.readerWriterGCD.readFiles()
-				DispatchQueue.main.async {
-					self.profileImage.image = outputModel.imagePhoto
-					self.nameTextField.text = outputModel.textName
-					self.descriptTextView.text = outputModel.textDescript
-					self.oldModel = outputModel
-					self.activityIndicator.isHidden = true
-					self.activityIndicator.stopAnimating()
-				}
-			}
-
+		let context = storageManager.mainContext! as NSManagedObjectContext
+		let user : UserModel? = StorageManager.findOrInsertUserModel(in: context)
+		
+		nameTextField.text = user?.textName
+		descriptTextView.text = user?.textDescript
+		profileImage.image = user?.imagePhoto
 	}
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -138,6 +111,7 @@ class ProfileViewController: UIViewController, NSFetchedResultsControllerDelegat
 		}
 		super.touchesBegan(touches, with: event)
 	}
+	
 	
 	//MARK: Actions
 	
@@ -160,84 +134,38 @@ class ProfileViewController: UIViewController, NSFetchedResultsControllerDelegat
 	}
 	
 	@IBAction func safeAction(_ sender: UIButton) {
-		
-		switch sender.tag {
-		case 1:
-//			activityIndicator.isHidden = false
-//			activityIndicator.startAnimating()
-//
-//			fotoButton.isEnabled = false
-//			buttonGCD.isEnabled = false
-//			buttonOperation.isEnabled = false
-//			nameTextField.isEnabled = false
-//			descriptTextView.isEditable = false
-//
-//			let inputModel = DataModelOfUser()
-//			inputModel.imagePhoto = profileImage.image
-//			inputModel.textName = nameTextField.text
-//			inputModel.textDescript = descriptTextView.text
-//
-//			let queue = DispatchQueue.global(qos: .utility)
-//			queue.async {
-//				self.readerWriterGCD.writeFiles(inputModel)
-//				DispatchQueue.main.async {
-//					self.activityIndicator.stopAnimating()
-//					self.buttonGCD.isEnabled = true
-//					self.buttonOperation.isEnabled = true
-//
-//					let alert = UIAlertController(title: "Данные сохранены!", message: "", preferredStyle: UIAlertControllerStyle.alert)
-//					alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: { action in
-//					}))
-//					self.present(alert, animated: true, completion: nil)
-//
-//					}
-//				}
-			
-			break
-		case 2:
-			// Запись с помощью Operation
-			
-			activityIndicator.isHidden = false
-			activityIndicator.startAnimating()
-			
-			fotoButton.isEnabled = false
-			buttonGCD.isEnabled = false
-			buttonOperation.isEnabled = false
-			nameTextField.isEnabled = false
-			descriptTextView.isEditable = false
-			
-			let inputModel = DataModelOfUser()
-			inputModel.imagePhoto = profileImage.image
-			inputModel.textName = nameTextField.text
-			inputModel.textDescript = descriptTextView.text
-			
-			readerWriterOperation = OperationDataManager()
-			readerWriterOperation.isReading = false
-			readerWriterOperation.inputModel = inputModel
-			readerWriterOperation.outputModel = oldModel
-			
-			readerWriterOperation.completionBlock = {
-				OperationQueue.main.addOperation {
-					self.activityIndicator.stopAnimating()
-					self.buttonGCD.isEnabled = true
-					self.buttonOperation.isEnabled = true
-
-					let alert = UIAlertController(title: "Данные сохранены!", message: "", preferredStyle: UIAlertControllerStyle.alert)
-					alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: { action in
-					}))
-					self.present(alert, animated: true, completion: nil)
-				}
-			}
-			
-			let writeQueue = OperationQueue()
-			writeQueue.addOperation(readerWriterOperation)
-		
-			break
-		default:
-			break
-		}
+		saveData()
 	}
 
+	func saveData() {
+		activityIndicator.isHidden = false
+		activityIndicator.startAnimating()
+		
+		let context : NSManagedObjectContext = storageManager.saveContext!
+		
+		do {
+			try context.execute(NSBatchDeleteRequest(fetchRequest: NSFetchRequest(entityName: "UserDataModel")))
+		} catch { }
+		storageManager.performSave(context: context, completionHandler: { })
+		
+		let user = UserModel.insertUserModel(in: context)
+		
+		let imageData : Data? = UIImagePNGRepresentation(profileImage.image!)
+		user.setValue(nameTextField.text, forKey: "textName")
+		user.setValue(descriptTextView.text, forKey: "textDescript")
+		user.setValue(imageData, forKey: "imagePhoto")
+		
+		storageManager.performSave(context: context, completionHandler: {
+			DispatchQueue.main.async {
+				let alert = UIAlertController(title: "Данные сохранены!", message: "", preferredStyle: UIAlertControllerStyle.alert)
+				alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: { action in
+				}))
+				self.present(alert, animated: true, completion: nil)
+				self.activityIndicator.stopAnimating()
+			}
+		})
+	}
+	
 	@IBAction func editAction(_ sender: Any) {
 		fotoButton.isEnabled = true
 		nameTextField.isEnabled = true
@@ -272,8 +200,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 		profileImage.image = imageFromPC
 
 		if oldModel?.imagePhoto != imageFromPC {
-			buttonOperation.isEnabled = true
-			buttonGCD.isEnabled = true
+			buttonEditProfile.isEnabled = true
 		}
 		
 		self.dismiss(animated: true, completion: nil)
@@ -295,8 +222,7 @@ extension ProfileViewController: UITextFieldDelegate, UITextViewDelegate {
 	
 	func textFieldDidEndEditing(_ textField: UITextField) {
 		if oldModel?.textName != textField.text {
-			buttonOperation.isEnabled = true
-			buttonGCD.isEnabled = true
+			buttonEditProfile.isEnabled = true
 		}
 	}
 	
@@ -308,8 +234,7 @@ extension ProfileViewController: UITextFieldDelegate, UITextViewDelegate {
 	func textViewDidEndEditing(_ textView: UITextView)
 	{
 		if oldModel?.textDescript != textView.text {
-			buttonOperation.isEnabled = true
-			buttonGCD.isEnabled = true
+			buttonEditProfile.isEnabled = true
 		}
 		textView.resignFirstResponder()
 	}

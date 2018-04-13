@@ -50,16 +50,16 @@ class MultipeerCommunicator: NSObject, Communicator {
     
 	override init() {
         
-        var userName : String!
-        // Чтение с помощью GCD
-        let queue = DispatchQueue.global(qos: .utility)
-        queue.sync {
-            let readerWriterGCD = GCDDataManager()
-            let outputModel : DataModelOfUser = readerWriterGCD.readFiles()
-            userName = outputModel.textName
-        }
+//        var userName : String!
+//        // Чтение с помощью GCD
+//        let queue = DispatchQueue.global(qos: .utility)
+//        queue.sync {
+//            let readerWriterGCD = GCDDataManager()
+//            let outputModel : UserModel = readerWriterGCD.readFiles()
+//            userName = outputModel.textName
+//        }
         
-        self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: ["userName" : userName!], serviceType: serviceType)
+        self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: ["userName" : "userNameVadim"], serviceType: serviceType)
         self.serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: serviceType)
 		
         super.init()

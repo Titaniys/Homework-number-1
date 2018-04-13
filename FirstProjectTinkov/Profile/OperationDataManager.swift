@@ -15,8 +15,8 @@ class OperationDataManager: AsyncOperation, ReaderWriterProtocol {
 	let fileForName = "fileForName.txt"
 	let fileForDescript = "fileForDescript.txt"
 	
-	var outputModel : DataModelOfUser?
-	var inputModel : DataModelOfUser?
+	var outputModel : UserModel?
+	var inputModel : UserModel?
 	
 	var isReading : Bool?
 	
@@ -24,7 +24,7 @@ class OperationDataManager: AsyncOperation, ReaderWriterProtocol {
 
 		if isReading == true {
 			asyncReading() { [unowned self]  model in
-				var tempModel = DataModelOfUser()
+				var tempModel = UserModel()
 				tempModel = model!
 				self.outputModel = tempModel
 			}
@@ -36,13 +36,13 @@ class OperationDataManager: AsyncOperation, ReaderWriterProtocol {
 		
 	}
 	
-	func asyncReading(completion:@escaping ((DataModelOfUser?) -> () )) {
-		let tempModel = DataModelOfUser()
+	func asyncReading(completion:@escaping ((UserModel?) -> () )) {
+		let tempModel = UserModel()
 		tempModel.textDescript = (readFile(file: fileForDescript) as? String)!
 		tempModel.textName = (readFile(file: fileForName) as? String)!
 		tempModel.imagePhoto = UIImage.init(data: (readFile(file: fileForPhoto) as? Data)!)!
 		
-		completion(tempModel as DataModelOfUser)
+		completion(tempModel as UserModel)
 	}
 	
 	func asyncWriting() {

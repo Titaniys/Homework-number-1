@@ -258,7 +258,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jsl-4d-hTD">
-                                <rect key="frame" x="30" y="390" width="240" height="114"/>
+                                <rect key="frame" x="30" y="390" width="260" height="114"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -272,24 +272,10 @@
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dJ2-Ay-0TC">
                                 <rect key="frame" x="20" y="518" width="280" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="isQ-VB-FJ5">
-                                        <rect key="frame" x="0.0" y="0.0" width="140" height="30"/>
-                                        <color key="backgroundColor" red="0.93862441669999996" green="1" blue="0.96791986249999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="gh2-ni-68B"/>
-                                        </constraints>
-                                        <state key="normal" title="GCD">
-                                            <color key="titleColor" red="0.0055123730964466988" green="0.0028143689553200815" blue="0.003077093155212712" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <color key="titleShadowColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="safeAction:" destination="YmN-aj-bI3" eventType="touchUpInside" id="ENg-1l-vdq"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAG-oF-83U">
-                                        <rect key="frame" x="140" y="0.0" width="140" height="30"/>
-                                        <color key="backgroundColor" red="0.93764436240000004" green="1" blue="0.96862924100000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <state key="normal" title="Operation">
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="30"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title=" Редактировать">
                                             <color key="titleColor" red="0.004654147897564429" green="0.0048510271301100598" blue="0.0055123730964466988" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
                                         <connections>
@@ -298,13 +284,16 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="TAG-oF-83U" firstAttribute="width" secondItem="isQ-VB-FJ5" secondAttribute="width" id="dEX-2P-9kF"/>
-                                    <constraint firstItem="TAG-oF-83U" firstAttribute="height" secondItem="isQ-VB-FJ5" secondAttribute="height" id="xkV-oH-EUC"/>
+                                    <constraint firstAttribute="height" constant="30" id="pUR-hv-wNR"/>
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="center" semanticContentAttribute="playback" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2QC-0M-5G1">
-                                <rect key="frame" x="251" y="276" width="39" height="68"/>
+                                <rect key="frame" x="240" y="294" width="50" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="YBB-dp-AMy"/>
+                                    <constraint firstAttribute="width" constant="50" id="zU9-zw-iiB"/>
+                                </constraints>
                                 <state key="normal" image="slr-camera-2-xxl">
                                     <attributedString key="attributedTitle">
                                         <fragment content="Button">
@@ -318,7 +307,7 @@
                                     <action selector="photoChanger:" destination="YmN-aj-bI3" eventType="touchUpInside" id="o3d-1l-B1L"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Vadim" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NdG-dE-xu5">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Введите имя" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NdG-dE-xu5">
                                 <rect key="frame" x="30" y="352" width="260" height="30"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
@@ -333,13 +322,12 @@
                             <constraint firstItem="VUN-57-ghm" firstAttribute="top" secondItem="jF7-eI-bRi" secondAttribute="top" constant="30" id="0uW-vx-385"/>
                             <constraint firstItem="2QC-0M-5G1" firstAttribute="bottom" secondItem="VUN-57-ghm" secondAttribute="bottom" id="44Z-aQ-DwT"/>
                             <constraint firstItem="jsl-4d-hTD" firstAttribute="top" secondItem="NdG-dE-xu5" secondAttribute="bottom" constant="8" id="4uW-vy-hza"/>
-                            <constraint firstItem="jF7-eI-bRi" firstAttribute="trailing" secondItem="jsl-4d-hTD" secondAttribute="trailing" constant="50" id="6y1-25-ejF"/>
+                            <constraint firstItem="jF7-eI-bRi" firstAttribute="trailing" secondItem="jsl-4d-hTD" secondAttribute="trailing" constant="30" id="6y1-25-ejF"/>
                             <constraint firstItem="jF7-eI-bRi" firstAttribute="trailing" secondItem="NdG-dE-xu5" secondAttribute="trailing" constant="30" id="9xu-cw-um6"/>
                             <constraint firstItem="dJ2-Ay-0TC" firstAttribute="leading" secondItem="jF7-eI-bRi" secondAttribute="leading" constant="20" id="CSE-WX-IBa"/>
                             <constraint firstItem="NdG-dE-xu5" firstAttribute="top" secondItem="VUN-57-ghm" secondAttribute="bottom" constant="8" id="KZJ-vn-YaS"/>
                             <constraint firstItem="dJ2-Ay-0TC" firstAttribute="top" secondItem="jsl-4d-hTD" secondAttribute="bottom" constant="14" id="MYi-LG-Skf"/>
                             <constraint firstItem="jF7-eI-bRi" firstAttribute="bottom" secondItem="dJ2-Ay-0TC" secondAttribute="bottom" constant="20" id="NFl-ru-KdL"/>
-                            <constraint firstItem="2QC-0M-5G1" firstAttribute="top" secondItem="jF7-eI-bRi" secondAttribute="top" constant="212" id="TTQ-mG-rxo"/>
                             <constraint firstItem="jsl-4d-hTD" firstAttribute="leading" secondItem="jF7-eI-bRi" secondAttribute="leading" constant="30" id="WM0-OU-Oc7"/>
                             <constraint firstItem="jsl-4d-hTD" firstAttribute="top" secondItem="2QC-0M-5G1" secondAttribute="bottom" constant="46" id="We3-v5-eB6"/>
                             <constraint firstItem="VUN-57-ghm" firstAttribute="leading" secondItem="jF7-eI-bRi" secondAttribute="leading" constant="30" id="ehw-52-DU7"/>
@@ -348,7 +336,6 @@
                             <constraint firstItem="jF7-eI-bRi" firstAttribute="trailing" secondItem="VUN-57-ghm" secondAttribute="trailing" constant="30" id="iEZ-q1-c5d"/>
                             <constraint firstItem="2QC-0M-5G1" firstAttribute="trailing" secondItem="VUN-57-ghm" secondAttribute="trailing" id="jeZ-rG-VKh"/>
                             <constraint firstItem="jF7-eI-bRi" firstAttribute="trailing" secondItem="dJ2-Ay-0TC" secondAttribute="trailing" constant="20" id="m9D-xS-wGW"/>
-                            <constraint firstItem="2QC-0M-5G1" firstAttribute="leading" secondItem="jF7-eI-bRi" secondAttribute="leading" constant="251" id="npV-eD-FQn"/>
                             <constraint firstItem="NdG-dE-xu5" firstAttribute="leading" secondItem="jF7-eI-bRi" secondAttribute="leading" constant="30" id="wkm-p0-5bw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jF7-eI-bRi"/>
@@ -367,8 +354,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="hd8-o9-Te3" id="Wl5-d0-GCJ"/>
-                        <outlet property="buttonGCD" destination="isQ-VB-FJ5" id="P98-tm-sDV"/>
-                        <outlet property="buttonOperation" destination="TAG-oF-83U" id="Lb7-pp-x1Y"/>
+                        <outlet property="buttonEditProfile" destination="TAG-oF-83U" id="Lb7-pp-x1Y"/>
                         <outlet property="descriptTextView" destination="jsl-4d-hTD" id="pq6-cq-zYc"/>
                         <outlet property="fotoButton" destination="2QC-0M-5G1" id="XBb-eB-Bep"/>
                         <outlet property="nameTextField" destination="NdG-dE-xu5" id="7Wh-xn-agE"/>

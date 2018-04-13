@@ -20,9 +20,9 @@ class GCDDataManager: NSObject, ReaderWriterProtocol {
 	let fileForName = "fileForName.txt"
 	let fileForDescriptSelf = "fileForDescript.txt"
 	
-	var oldModel : DataModelOfUser?
+	var oldModel : UserModel?
 	
-	func writeFiles(_ inputModel : DataModelOfUser) {
+	func writeFiles(_ inputModel : UserModel) {
 		
 		if oldModel?.textName != inputModel.textName {
 			writeFile(inputModel.textName, toFile: fileForName)
@@ -35,9 +35,9 @@ class GCDDataManager: NSObject, ReaderWriterProtocol {
 		}
 	}
 	
-	func readFiles()  -> DataModelOfUser {
+	func readFiles()  -> UserModel {
 		
-		let outputModel = DataModelOfUser()
+		let outputModel = UserModel()
 		
 		outputModel.textDescript = (readFile(file: fileForDescriptSelf) as? String)!
 		outputModel.textName = (readFile(file: fileForName) as? String)!

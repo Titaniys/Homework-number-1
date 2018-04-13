@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="UserDataModel" representedClassName="UserDataModel" syncable="YES" codeGenerationType="class">
+        <attribute name="imagePhoto" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="textDescript" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="textName" optional="YES" attributeType="String" syncable="YES"/>
+        <fetchedProperty name="userDataModel" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="UserDataModel"/>
+        </fetchedProperty>
+    </entity>
+    <elements>
+        <element name="UserDataModel" positionX="-63" positionY="-18" width="128" height="119"/>
+    </elements>
+</model>

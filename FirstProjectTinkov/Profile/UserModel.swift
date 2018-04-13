@@ -1,5 +1,5 @@
 //
-//  DataModelOfUser.swift
+//  UserModel.swift
 //  FirstProjectTinkov
 //
 //  Created by Вадим Чистяков on 30.03.18.
@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import CoreData
 
-class DataModelOfUser: NSObject {
+
+class UserModel: NSObject {
 
 	var imagePhoto : UIImage?
 	var textName : String?

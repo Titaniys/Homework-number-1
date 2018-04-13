@@ -15,8 +15,7 @@
 		DD25C73A206599F800856590 /* MessegesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C739206599F800856590 /* MessegesViewController.swift */; };
 		DD25C73D206BBFCE00856590 /* GCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C73C206BBFCE00856590 /* GCDDataManager.swift */; };
 		DD25C73F206BBFDD00856590 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C73E206BBFDD00856590 /* AsyncOperation.swift */; };
-		DD25C765206D909600856590 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = DD25C764206D909600856590 /* placeholder.png */; };
-		DD25C767206E47C100856590 /* DataModelOfUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C766206E47C100856590 /* DataModelOfUser.swift */; };
+		DD25C767206E47C100856590 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C766206E47C100856590 /* UserModel.swift */; };
 		DD25C769206E64D700856590 /* OperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C768206E64D700856590 /* OperationDataManager.swift */; };
 		DD25C77020715E4200856590 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C76F20715E4200856590 /* MessageTableViewCell.swift */; };
 		DD25C77220716BBA00856590 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C77120716BBA00856590 /* MessageModel.swift */; };
@@ -25,6 +24,9 @@
 		DD3472E220644CAF00566287 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3472E120644CAF00566287 /* ConversationsListViewController.swift */; };
 		DD3472E5206454C400566287 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3472E4206454C400566287 /* ConversationTableViewCell.swift */; };
 		DD58E1FC20738E35001FBABA /* MultipeerConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58E1FA20738E34001FBABA /* MultipeerConnectivityService.swift */; };
+		DDAEE40C207FE7310062CBD5 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAEE40B207FE7310062CBD5 /* StorageManager.swift */; };
+		DDAEE40E207FE7390062CBD5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDAEE40D207FE7390062CBD5 /* Default-568h@2x.png */; };
+		DDAEE410208003EB0062CBD5 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = DDAEE40F208003EB0062CBD5 /* placeholder.png */; };
 		DDD638422074269700F761C4 /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD638412074269700F761C4 /* ConversationModel.swift */; };
 		DDF7E17E20753F290083537D /* ModelForUser.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDF7E17C20753F290083537D /* ModelForUser.xcdatamodeld */; };
 		DDF7E1842075731A0083537D /* whatsapp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DDF7E1832075731A0083537D /* whatsapp.jpg */; };
@@ -41,8 +43,7 @@
 		DD25C739206599F800856590 /* MessegesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessegesViewController.swift; sourceTree = "<group>"; };
 		DD25C73C206BBFCE00856590 /* GCDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDDataManager.swift; sourceTree = "<group>"; };
 		DD25C73E206BBFDD00856590 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
-		DD25C764206D909600856590 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder.png; path = "FirstProjectTinkov/Assets.xcassets/placeholder-user.imageset/placeholder.png"; sourceTree = SOURCE_ROOT; };
-		DD25C766206E47C100856590 /* DataModelOfUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelOfUser.swift; sourceTree = "<group>"; };
+		DD25C766206E47C100856590 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		DD25C768206E64D700856590 /* OperationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataManager.swift; sourceTree = "<group>"; };
 		DD25C76F20715E4200856590 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		DD25C77120716BBA00856590 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
@@ -54,6 +55,9 @@
 		DD3472E120644CAF00566287 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		DD3472E4206454C400566287 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		DD58E1FA20738E34001FBABA /* MultipeerConnectivityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerConnectivityService.swift; sourceTree = "<group>"; };
+		DDAEE40B207FE7310062CBD5 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		DDAEE40D207FE7390062CBD5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		DDAEE40F208003EB0062CBD5 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder.png; path = "FirstProjectTinkov/Assets.xcassets/placeholder-user.imageset/placeholder.png"; sourceTree = SOURCE_ROOT; };
 		DDD638412074269700F761C4 /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		DDF7E17D20753F290083537D /* ModelForUser.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ModelForUser.xcdatamodel; sourceTree = "<group>"; };
 		DDF7E1832075731A0083537D /* whatsapp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = whatsapp.jpg; path = icon/whatsapp.jpg; sourceTree = SOURCE_ROOT; };
@@ -89,18 +93,19 @@
 		DD1384C4203DD25000CFE9F5 /* FirstProjectTinkov */ = {
 			isa = PBXGroup;
 			children = (
+				DD3472D92064486100566287 /* FirstProjectTinkov-Bridging-Header.h */,
+				DD1384D1203DD25000CFE9F5 /* Info.plist */,
+				DDAEE40D207FE7390062CBD5 /* Default-568h@2x.png */,
 				DD1384C5203DD25000CFE9F5 /* AppDelegate.swift */,
-				DDF7E17C20753F290083537D /* ModelForUser.xcdatamodeld */,
 				DD1384CC203DD25000CFE9F5 /* Assets.xcassets */,
 				DD1E4362204326E900C18C89 /* Main.storyboard */,
 				DD1384CE203DD25000CFE9F5 /* LaunchScreen.storyboard */,
-				DD1384D1203DD25000CFE9F5 /* Info.plist */,
-				DD3472D92064486100566287 /* FirstProjectTinkov-Bridging-Header.h */,
 				DD25C76D20715A9B00856590 /* Themes */,
 				DD25C73B206BBF8A00856590 /* Profile */,
 				DD3472E32064549D00566287 /* ConversationList */,
 				DD25C76E20715ABB00856590 /* Conversation */,
 				DD58E1FE20738E42001FBABA /* MultipeerConnectivity */,
+				DDAEE40A207FE6F20062CBD5 /* CoreData */,
 			);
 			path = FirstProjectTinkov;
 			sourceTree = "<group>";
@@ -112,8 +117,8 @@
 				DD25C73C206BBFCE00856590 /* GCDDataManager.swift */,
 				DD25C768206E64D700856590 /* OperationDataManager.swift */,
 				DD25C73E206BBFDD00856590 /* AsyncOperation.swift */,
-				DD25C766206E47C100856590 /* DataModelOfUser.swift */,
-				DD25C764206D909600856590 /* placeholder.png */,
+				DD25C766206E47C100856590 /* UserModel.swift */,
+				DDAEE40F208003EB0062CBD5 /* placeholder.png */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -157,6 +162,15 @@
 			);
 			name = MultipeerConnectivity;
 			path = Themes;
+			sourceTree = "<group>";
+		};
+		DDAEE40A207FE6F20062CBD5 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				DDF7E17C20753F290083537D /* ModelForUser.xcdatamodeld */,
+				DDAEE40B207FE7310062CBD5 /* StorageManager.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,10 +234,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD1384D0203DD25000CFE9F5 /* LaunchScreen.storyboard in Resources */,
+				DDAEE410208003EB0062CBD5 /* placeholder.png in Resources */,
 				DD1E4360204326E900C18C89 /* Main.storyboard in Resources */,
-				DD25C765206D909600856590 /* placeholder.png in Resources */,
 				DD1384CD203DD25000CFE9F5 /* Assets.xcassets in Resources */,
 				DDF7E1842075731A0083537D /* whatsapp.jpg in Resources */,
+				DDAEE40E207FE7390062CBD5 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +249,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDAEE40C207FE7310062CBD5 /* StorageManager.swift in Sources */,
 				DD1384C8203DD25000CFE9F5 /* ProfileViewController.swift in Sources */,
 				DD25C73A206599F800856590 /* MessegesViewController.swift in Sources */,
 				DD25C73D206BBFCE00856590 /* GCDDataManager.swift in Sources */,
@@ -247,7 +263,7 @@
 				DD3472E5206454C400566287 /* ConversationTableViewCell.swift in Sources */,
 				DD3472E02064493A00566287 /* Themes.m in Sources */,
 				DD1384C6203DD25000CFE9F5 /* AppDelegate.swift in Sources */,
-				DD25C767206E47C100856590 /* DataModelOfUser.swift in Sources */,
+				DD25C767206E47C100856590 /* UserModel.swift in Sources */,
 				DD3472DC2064486200566287 /* ThemesViewController.m in Sources */,
 				DD25C73F206BBFDD00856590 /* AsyncOperation.swift in Sources */,
 			);
