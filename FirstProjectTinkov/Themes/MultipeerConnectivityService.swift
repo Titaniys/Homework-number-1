@@ -82,7 +82,7 @@ class MultipeerCommunicator: NSObject, Communicator {
         
         NSLog("%@", "send: \(string) to \(userID) peers")
         
-        let messageId = self.generateMess()
+        let messageId = self.generateMessageId()
         
         let json = ["eventType":"TextMessage","text":string,"messageId":messageId]
         
@@ -100,7 +100,7 @@ class MultipeerCommunicator: NSObject, Communicator {
         }
     }
     
-    private func generateMess() -> String {
+    private func generateMessageId() -> String {
         return "\(arc4random_uniform(UINT32_MAX))+\(Date.timeIntervalSinceReferenceDate)".data(using: .utf8)!.base64EncodedString()
     }
 }

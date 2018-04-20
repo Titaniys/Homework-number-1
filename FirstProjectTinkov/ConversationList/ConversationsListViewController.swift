@@ -8,6 +8,7 @@
 
 import UIKit
 import MultipeerConnectivity
+import CoreData
 
 
 class ConversationsListViewController: UITableViewController, ThemesViewControllerDelegate, CommunicatorDelegate {
@@ -18,6 +19,9 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 	
 	var dictionaryUsers = [String : ConversationModel]()
 	var arrayUsers = [ConversationModel]()
+	
+	var storageManager = StorageManager()
+	var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,17 +52,25 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 	
 	//MARK: UITableViewDataSource
 	
+	override func numberOfSections(in tableView: UITableView) -> Int {
+		guard let sections = fetchedResultsController?.sections else { return 0 }
+		return sections.count
+	}
+	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return arrayUsers.count
+		guard let sections = fetchedResultsController.sections else { return 0 }
+		return sections[section].numberOfObjects
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let identifier = "ConversationCell"
 		
+		let modelFromDB = fetchedResultsController?.object(at: indexPath) as! ConversationModel
+		
 		let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ConversationTableViewCell
 		
-		cell.configureCell(arrayUsers[indexPath.row])
+		cell.configureCell(modelFromDB)
 		
 		return cell
 	}
@@ -74,8 +86,6 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 		}
 	}
 	
-	
-
 	@IBAction func didTap(_ sender: Any) {
 		let vc = self.storyboard?.instantiateViewController(withIdentifier: "ThemesViewController")
 		self.themesVC = vc as! ThemesViewController
@@ -117,13 +127,16 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 	func didFoundUser(userID: MCPeerID, userName: String?) {
 		NSLog("didFoundUser %@", userID)
 		
-		let invitedUser : ConversationModel = ConversationModel()
-		invitedUser.name = userName
-		invitedUser.peer = userID
-		invitedUser.online = true
-		dictionaryUsers[userID.displayName] = invitedUser
+		let conversation = NSManagedObject.createEntityInContext("Conversation")
+		conversation.setValue(userID.displayName, forKey: "conversationId")
+		conversation.setValue(userName, forKey: "name")
+		conversation.setValue(true, forKey: "online")
 		
-		reloadData()
+		conversation.insertByID(userID.displayName)
+		
+		let context = StorageManager.sharedStorageManager.saveContext
+		
+		StorageManager.sharedStorageManager.performSave(context: context!) { }
 	}
 	
 	func didLostUser(userID: String) {
@@ -154,6 +167,65 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 		reloadData()
 	}
 	
+	
+	//MARK: CoreData methods
+	
+	func initializeFetchedResultsController() {
+		let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Conversation")
+//		let datelastMessageSort = NSSortDescriptor(key: "department.name", ascending: true)
+//		let lastNameSort = NSSortDescriptor(key: "lastName", ascending: true)
+//		request.sortDescriptors = [departmentSort, lastNameSort]
+		
+		let context = storageManager.mainContext! as NSManagedObjectContext
+		fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+		fetchedResultsController.delegate = self
+		
+		do {
+			try fetchedResultsController.performFetch()
+		} catch {
+			fatalError("Failed to initialize FetchedResultsController: \(error)")
+		}
+	}
+}
+
+
+// MARK: - NSFetchedResultsControllerDelegate
+
+extension ConversationsListViewController : NSFetchedResultsControllerDelegate {
+
+	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+		tableView.beginUpdates()
+	}
+	
+	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+		switch type {
+		case .insert:
+			tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+		case .delete:
+			tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+		case .move:
+			break
+		case .update:
+			break
+		}
+	}
+	
+	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+		switch type {
+		case .insert:
+			tableView.insertRows(at: [newIndexPath!], with: .fade)
+		case .delete:
+			tableView.deleteRows(at: [indexPath!], with: .fade)
+		case .update:
+			tableView.reloadRows(at: [indexPath!], with: .fade)
+		case .move:
+			tableView.moveRow(at: indexPath!, to: newIndexPath!)
+		}
+	}
+	
+	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+		tableView.endUpdates()
+	}
 }
 
 

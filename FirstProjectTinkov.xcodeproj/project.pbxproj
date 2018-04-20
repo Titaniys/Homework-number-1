@@ -12,6 +12,7 @@
 		DD1384CD203DD25000CFE9F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD1384CC203DD25000CFE9F5 /* Assets.xcassets */; };
 		DD1384D0203DD25000CFE9F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD1384CE203DD25000CFE9F5 /* LaunchScreen.storyboard */; };
 		DD1E4360204326E900C18C89 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD1E4362204326E900C18C89 /* Main.storyboard */; };
+		DD238DB2208915C800FA7218 /* NSManagedObject+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD238DB1208915C800FA7218 /* NSManagedObject+Helper.swift */; };
 		DD25C73A206599F800856590 /* MessegesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C739206599F800856590 /* MessegesViewController.swift */; };
 		DD25C73D206BBFCE00856590 /* GCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C73C206BBFCE00856590 /* GCDDataManager.swift */; };
 		DD25C73F206BBFDD00856590 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25C73E206BBFDD00856590 /* AsyncOperation.swift */; };
@@ -28,7 +29,7 @@
 		DDAEE40E207FE7390062CBD5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDAEE40D207FE7390062CBD5 /* Default-568h@2x.png */; };
 		DDAEE410208003EB0062CBD5 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = DDAEE40F208003EB0062CBD5 /* placeholder.png */; };
 		DDD638422074269700F761C4 /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD638412074269700F761C4 /* ConversationModel.swift */; };
-		DDF7E17E20753F290083537D /* ModelForUser.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDF7E17C20753F290083537D /* ModelForUser.xcdatamodeld */; };
+		DDF7E17E20753F290083537D /* MessagerModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDF7E17C20753F290083537D /* MessagerModels.xcdatamodeld */; };
 		DDF7E1842075731A0083537D /* whatsapp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DDF7E1832075731A0083537D /* whatsapp.jpg */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		DD1384CF203DD25000CFE9F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD1384D1203DD25000CFE9F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD1E4361204326E900C18C89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DD238DB1208915C800FA7218 /* NSManagedObject+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Helper.swift"; sourceTree = "<group>"; };
 		DD25C739206599F800856590 /* MessegesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessegesViewController.swift; sourceTree = "<group>"; };
 		DD25C73C206BBFCE00856590 /* GCDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDDataManager.swift; sourceTree = "<group>"; };
 		DD25C73E206BBFDD00856590 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
@@ -167,8 +169,9 @@
 		DDAEE40A207FE6F20062CBD5 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				DDF7E17C20753F290083537D /* ModelForUser.xcdatamodeld */,
+				DDF7E17C20753F290083537D /* MessagerModels.xcdatamodeld */,
 				DDAEE40B207FE7310062CBD5 /* StorageManager.swift */,
+				DD238DB1208915C800FA7218 /* NSManagedObject+Helper.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -257,7 +260,8 @@
 				DD25C769206E64D700856590 /* OperationDataManager.swift in Sources */,
 				DD58E1FC20738E35001FBABA /* MultipeerConnectivityService.swift in Sources */,
 				DDD638422074269700F761C4 /* ConversationModel.swift in Sources */,
-				DDF7E17E20753F290083537D /* ModelForUser.xcdatamodeld in Sources */,
+				DDF7E17E20753F290083537D /* MessagerModels.xcdatamodeld in Sources */,
+				DD238DB2208915C800FA7218 /* NSManagedObject+Helper.swift in Sources */,
 				DD25C77020715E4200856590 /* MessageTableViewCell.swift in Sources */,
 				DD25C77220716BBA00856590 /* MessageModel.swift in Sources */,
 				DD3472E5206454C400566287 /* ConversationTableViewCell.swift in Sources */,
@@ -463,13 +467,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		DDF7E17C20753F290083537D /* ModelForUser.xcdatamodeld */ = {
+		DDF7E17C20753F290083537D /* MessagerModels.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				DDF7E17D20753F290083537D /* ModelForUser.xcdatamodel */,
 			);
 			currentVersion = DDF7E17D20753F290083537D /* ModelForUser.xcdatamodel */;
-			path = ModelForUser.xcdatamodeld;
+			path = MessagerModels.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -12,6 +12,9 @@ import CoreData
 
 class StorageManager: NSObject {
 
+	
+	static let sharedStorageManager = StorageManager()
+	
 	private var storageURL : URL {
 		let documentDirUrl : URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 		let url = documentDirUrl.appendingPathComponent("profileStore")
@@ -19,7 +22,7 @@ class StorageManager: NSObject {
 	}
 	
 	
-	private let managedObjectModelName = "ModelForUser"
+	private let managedObjectModelName = "MessagerModels"
 	private var _managedObjectModel : NSManagedObjectModel?
 	private var managedObjectModel : NSManagedObjectModel? {
 		get {
@@ -57,7 +60,8 @@ class StorageManager: NSObject {
 			return _persistentStoreCoordinator
 		}
 	}
-	
+
+	/// Контекст для сохранения в CoreData
 	private var _masterContext : NSManagedObjectContext?
 	private var  masterContext : NSManagedObjectContext? {
 		get {
@@ -77,6 +81,7 @@ class StorageManager: NSObject {
 	}
 	
 	
+	/// Контекст для отображения данных на UI
 	private var _mainContext : NSManagedObjectContext?
 	public var mainContext : NSManagedObjectContext? {
 		get {
@@ -96,6 +101,7 @@ class StorageManager: NSObject {
 	}
 	
 	
+	/// Верхнеуровневый контекст
 	private var _saveContext : NSManagedObjectContext?
 	public var saveContext : NSManagedObjectContext? {
 		get {
@@ -115,6 +121,11 @@ class StorageManager: NSObject {
 	}
 	
 	
+	/// Рекурсивное сохранение контекстов
+	///
+	/// - Parameters:
+	///   - context: контекст
+	///   - completionHandler: блок вызываемый по завершению
 	public func performSave(context: NSManagedObjectContext, completionHandler : (() -> Void)? ) {
 		
 		if context.hasChanges {
@@ -136,6 +147,25 @@ class StorageManager: NSObject {
 		}
 	}
 	
+	/**
+	Удаление объектов из Core Data по их ID
+	
+	- parameter objects: Массив удаляемых объектов
+	*/
+	class func deleteObjects(_ objects: Set<NSManagedObject>) {
+		
+		if objects.count > 0 {
+			
+			let context = sharedStorageManager.saveContext
+			
+			for object in objects {
+				
+				context?.delete(object)
+			}
+			
+			sharedStorageManager.performSave(context: context!, completionHandler: { })
+		}
+	}
 	
 	static func findOrInsertUserModel(in context: NSManagedObjectContext) -> UserModel? {
 		let templateName = "UserDataModel"
@@ -172,8 +202,4 @@ extension UserModel {
 		let user = NSManagedObject(entity: entity!, insertInto: context)
 		return user
 	}
-	
-	
-
-	
 }

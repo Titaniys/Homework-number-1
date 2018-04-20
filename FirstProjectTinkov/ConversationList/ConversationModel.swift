@@ -12,7 +12,7 @@ import MultipeerConnectivity
 protocol ConversationCellConfiguration : class {
 	
 	var name : String? {get set}
-	var peer : MCPeerID? {get set}
+	var conversationId : String? {get set}
 	var lastMessage : String? {get set}
 	var date : Date? {get set}
 	var online : Bool {get set}
@@ -25,13 +25,12 @@ protocol ConversationCellConfiguration : class {
 class ConversationModel: NSObject, ConversationCellConfiguration {
 	
 	var name: String?
-	var peer: MCPeerID?
+	var conversationId: String?
 	var lastMessage: String?
 	var date: Date?
 	var online: Bool = false
 	var hasUnrealMessage: Bool = false
     
     var arrayMessages = [MessageModel]()
-    
-
+	
 }

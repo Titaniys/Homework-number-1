@@ -132,9 +132,9 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 			self.tableView.updateConstraints()
 		}
 		
-		multipeerCommunicator.sendMessage(string: inputMessageTextView.text, to:user.peer! ) { (Bool, Error) in
-			
-		}
+//		multipeerCommunicator.sendMessage(string: inputMessageTextView.text, to:user.peer! ) { (Bool, Error) in
+		
+//		}
 		inputMessageTextView.text = ""
 	}
 	//MARK: CallbackProtocol
