@@ -13,8 +13,6 @@ import CoreData
 class StorageManager: NSObject {
 
 	
-	static let sharedStorageManager = StorageManager()
-	
 	private var storageURL : URL {
 		let documentDirUrl : URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 		let url = documentDirUrl.appendingPathComponent("profileStore")
@@ -147,25 +145,25 @@ class StorageManager: NSObject {
 		}
 	}
 	
-	/**
-	Удаление объектов из Core Data по их ID
-	
-	- parameter objects: Массив удаляемых объектов
-	*/
-	class func deleteObjects(_ objects: Set<NSManagedObject>) {
-		
-		if objects.count > 0 {
-			
-			let context = sharedStorageManager.saveContext
-			
-			for object in objects {
-				
-				context?.delete(object)
-			}
-			
-			sharedStorageManager.performSave(context: context!, completionHandler: { })
-		}
-	}
+//    /**
+//    Удаление объектов из Core Data по их ID
+//    
+//    - parameter objects: Массив удаляемых объектов
+//    */
+//    class func deleteObjects(_ objects: Set<NSManagedObject>) {
+//        
+//        if objects.count > 0 {
+//            
+//            let context = sharedStorageManager.saveContext
+//            
+//            for object in objects {
+//                
+//                context?.delete(object)
+//            }
+//            
+//            sharedStorageManager.performSave(context: context!, completionHandler: { })
+//        }
+//    }
 	
 	static func findOrInsertUserModel(in context: NSManagedObjectContext) -> UserModel? {
 		let templateName = "UserDataModel"

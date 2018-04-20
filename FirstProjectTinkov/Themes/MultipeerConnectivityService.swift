@@ -59,7 +59,9 @@ class MultipeerCommunicator: NSObject, Communicator {
 //            userName = outputModel.textName
 //        }
         
-        self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: ["userName" : "userNameVadim"], serviceType: serviceType)
+        let name = UIDevice.current.name
+        
+        self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: ["userName" : name], serviceType: serviceType)
         self.serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: serviceType)
 		
         super.init()
@@ -82,7 +84,7 @@ class MultipeerCommunicator: NSObject, Communicator {
         
         NSLog("%@", "send: \(string) to \(userID) peers")
         
-        let messageId = self.generateMessageId()
+        let messageId = generateMessageId()
         
         let json = ["eventType":"TextMessage","text":string,"messageId":messageId]
         

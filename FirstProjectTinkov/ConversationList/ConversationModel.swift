@@ -8,6 +8,8 @@
 
 import UIKit
 import MultipeerConnectivity
+import CoreData
+
 
 protocol ConversationCellConfiguration : class {
 	
@@ -22,7 +24,7 @@ protocol ConversationCellConfiguration : class {
 }
 
 
-class ConversationModel: NSObject, ConversationCellConfiguration {
+class ConversationModel: NSObject, ConversationCellConfiguration, NSFetchRequestResult {
 	
 	var name: String?
 	var conversationId: String?

@@ -15,22 +15,22 @@ class ConversationTableViewCell: UITableViewCell {
 	@IBOutlet weak var dateLabel: UILabel!
 	
 	
-	func configureCell(_ model: ConversationModel) {
+	func configureCell(_ model: Conversation) {
 		nameLabel.text = model.name
-        let lastObject = model.arrayMessages.last
-        if (lastObject != nil) {
-            messageLabel.text = lastObject?.textMessage
-		} else {
-			messageLabel.text = "Пока нет сообщений..."
-		}
-		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//        let lastObject = model.arrayMessages.last
+//        if (lastObject != nil) {
+//            messageLabel.text = lastObject?.textMessage
+//        } else {
+//            messageLabel.text = "Пока нет сообщений..."
+//        }
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 		
-		if (model.date != nil)  {
-			dateLabel.text = dateFormatter.string(from:model.date!)
-		} else {
-			dateLabel.text = ""
-		}
+//        if (model.date != nil)  {
+//            dateLabel.text = dateFormatter.string(from:model.date!)
+//        } else {
+//            dateLabel.text = ""
+//        }
 		
 	}
 	
