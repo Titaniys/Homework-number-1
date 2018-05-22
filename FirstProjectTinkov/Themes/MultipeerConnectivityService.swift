@@ -24,7 +24,7 @@ protocol CommunicatorDelegate : class {
 }
 
 protocol Communicator {
-	func sendMessage(string: String, to userID: MCPeerID, completionHandler: ((_ success: Bool, _ error: Error?) -> ())?)
+	func sendMessage(string: String, to userID: String, completionHandler: ((_ success: Bool, _ error: Error?) -> ())?)
 	var delegate : CommunicatorDelegate? {get set}
 	var online : Bool? {get set}
 }
@@ -37,34 +37,35 @@ class MultipeerCommunicator: NSObject, Communicator {
 	let serviceType = "tinkoff-chat"
 	
     let myPeerId = MCPeerID(displayName: (UIDevice.current.identifierForVendor?.uuidString)!)
-	let serviceAdvertiser : MCNearbyServiceAdvertiser
-	let serviceBrowser : MCNearbyServiceBrowser
+	
+	var serviceAdvertiser : MCNearbyServiceAdvertiser!
+	
+	var serviceBrowser : MCNearbyServiceBrowser!
 	
 	weak var delegate : CommunicatorDelegate?
-
-    lazy var session : MCSession = {
-        let session = MCSession(peer: self.myPeerId, securityIdentity: nil, encryptionPreference: .required)
-        session.delegate = self
-        return session
-    }()
-    
+	
+	var session : MCSession!
+	
+	var foundPeers = [MCPeerID]()
+	
+//    lazy var session : MCSession = {
+//        let session = MCSession(peer: self.myPeerId, securityIdentity: nil, encryptionPreference: .required)
+//        session.delegate = self
+//        return session
+//    }()
+	
 	override init() {
-        
-//        var userName : String!
-//        // Чтение с помощью GCD
-//        let queue = DispatchQueue.global(qos: .utility)
-//        queue.sync {
-//            let readerWriterGCD = GCDDataManager()
-//            let outputModel : UserModel = readerWriterGCD.readFiles()
-//            userName = outputModel.textName
-//        }
-        
+		
+		super.init()
+		
         let name = UIDevice.current.name
-        
+		
+		session = MCSession(peer: myPeerId)
+		session.delegate = self
+		
         self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: ["userName" : name], serviceType: serviceType)
         self.serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: serviceType)
 		
-        super.init()
 		
 		self.serviceAdvertiser.delegate = self
 		self.serviceAdvertiser.startAdvertisingPeer()
@@ -80,10 +81,10 @@ class MultipeerCommunicator: NSObject, Communicator {
 	}
 	
     
-    func sendMessage(string: String, to userID: MCPeerID, completionHandler:((Bool, Error?) -> ())?) {
+    func sendMessage(string: String, to userID: String, completionHandler:((Bool, Error?) -> ())?) {
         
         NSLog("%@", "send: \(string) to \(userID) peers")
-        
+		
         let messageId = generateMessageId()
         
         let json = ["eventType":"TextMessage","text":string,"messageId":messageId]
@@ -91,14 +92,21 @@ class MultipeerCommunicator: NSObject, Communicator {
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         
         if session.connectedPeers.count > 0 {
-            do {
-                try self.session.send(jsonData!, toPeers: [userID], with: .reliable)
-                completionHandler!(true, nil)
-            }
-            catch let error {
-                NSLog("%@", "Error for sending: \(error)")
-                completionHandler!(true, error)
-            }
+			
+			for (_, peer)  in foundPeers.enumerated() {
+				
+				if userID == peer.displayName {
+					do {
+						
+						try self.session.send(jsonData!, toPeers: [peer], with: .reliable)
+						completionHandler!(true, nil)
+					}
+					catch let error {
+						NSLog("%@", "Error for sending: \(error)")
+						completionHandler!(true, error)
+					}
+				}
+			}
         }
     }
     
@@ -132,13 +140,22 @@ extension MultipeerCommunicator : MCNearbyServiceBrowserDelegate {
 	
 	func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
 		NSLog("%@", "lostPeer: \(peerID)")
+		for (index, aPeer) in foundPeers.enumerated() {
+			if aPeer == peerID {
+				foundPeers.remove(at: index)
+				break
+			}
+		}
 		self.delegate?.didLostUser(userID: peerID.displayName)
 	}
 	
 	func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
 		NSLog("%@", "foundPeer: \(peerID)")
+
+		browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
 		NSLog("%@", "invitePeer: \(peerID)")
-		browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
+		
+		foundPeers.append(peerID)
 		self.delegate?.didFoundUser(userID: peerID, userName: info?["userName"])
 	}
 	

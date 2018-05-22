@@ -4,9 +4,13 @@
         <attribute name="conversationId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="online" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Message" inverseName="conversation" inverseEntity="Message" syncable="YES"/>
     </entity>
     <entity name="Message" representedClassName="Message" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="incomming" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="conversation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Conversation" inverseName="messages" inverseEntity="Conversation" syncable="YES"/>
     </entity>
     <entity name="UserDataModel" representedClassName="UserDataModel" syncable="YES" codeGenerationType="class">
         <attribute name="imagePhoto" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
@@ -19,8 +23,8 @@
     <fetchRequest name="GetOnlineUsers" entity="Conversation"/>
     <fetchRequest name="GetUserWithId" entity="Conversation"/>
     <elements>
+        <element name="Conversation" positionX="-72" positionY="294" width="128" height="103"/>
+        <element name="Message" positionX="97" positionY="135" width="128" height="103"/>
         <element name="UserDataModel" positionX="-63" positionY="-18" width="128" height="88"/>
-        <element name="Conversation" positionX="-72" positionY="294" width="128" height="88"/>
-        <element name="Message" positionX="142" positionY="147" width="128" height="60"/>
     </elements>
 </model>

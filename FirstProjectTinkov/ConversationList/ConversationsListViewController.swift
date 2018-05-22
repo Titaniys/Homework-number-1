@@ -27,7 +27,7 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
         let fetchRequest : NSFetchRequest<Conversation> = Conversation.fetchRequest()
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: storageManager.mainContext!, sectionNameKeyPath: "name", cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: storageManager.mainContext!, sectionNameKeyPath: "online", cacheName: nil)
         fetchedResultsController.delegate = self
         
         return fetchedResultsController
@@ -56,10 +56,11 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 	}
 	
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		if section == 0 {
-			return "Online"
-		} else {
+		let sectionInfo : NSFetchedResultsSectionInfo = fetchedResultsController.sections![section]
+		if sectionInfo.name == "0" {
 			return "Offline"
+		} else {
+			return "Online"
 		}
 	}
 	
@@ -95,8 +96,8 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 			let destination = segue.destination as? MessegesViewController
 
 			destination?.multipeerCommunicator = multipeerCommunicator
-			let selectedItem : Int = (tableView.indexPathForSelectedRow?.row)!
-			destination?.user = arrayUsers[selectedItem]
+			let modelFromDB = fetchedResultsController.object(at: tableView.indexPathForSelectedRow!)
+			destination?.conversation = modelFromDB
 		}
 	}
 	
@@ -125,22 +126,10 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 	func didFoundUser(userID: MCPeerID, userName: String?) {
 		NSLog("didFoundUser %@", userID)
 		
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Conversation")
-        request.predicate = NSPredicate.init(format: "conversationId == %@", userID.displayName)
+		let foundedObject = getConversationOnId(id: userID.displayName)
         
-        var foundedObject: AnyObject? = nil
-        
-        do {
-            
-            foundedObject = try storageManager.saveContext!.fetch(request) as NSArray
-        }
-        catch let error as NSError {
-            
-            print("Ошибка при поиске в БД", error)
-        }
-        
-        if ((foundedObject?.count) != 0) {
-            foundedObject?.setValue(true, forKey: "online")
+        if (foundedObject.count != 0) {
+            foundedObject.setValue(true, forKey: "online")
         }
         else {
             let conversation = NSEntityDescription.insertNewObject(forEntityName: "Conversation", into: storageManager.saveContext!)
@@ -153,8 +142,12 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 	
 	func didLostUser(userID: String) {
 		NSLog("didLostUser %@", userID)
-		dictionaryUsers[userID] = nil
+		let foundedObject = getConversationOnId(id: userID)
 		
+		if (foundedObject.count != 0) {
+			foundedObject.setValue(false, forKey: "online")
+		}
+		storageManager.performSave(context: storageManager.saveContext!) { }
 	}
 	
 	//errors
@@ -177,7 +170,24 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 	
 	
 	//MARK: CoreData methods
-	
+	func getConversationOnId(id: String) -> NSArray {
+		
+		let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Conversation")
+		request.predicate = NSPredicate.init(format: "conversationId == %@", id)
+		
+		var foundedObject: AnyObject? = nil
+		
+		do {
+			
+			foundedObject = try storageManager.saveContext!.fetch(request) as NSArray
+		}
+		catch let error as NSError {
+			
+			print("Ошибка при поиске в БД", error)
+		}
+		
+		return foundedObject as! NSArray
+	}
 }
 
 
@@ -219,6 +229,3 @@ extension ConversationsListViewController : NSFetchedResultsControllerDelegate {
 		tableView.endUpdates()
 	}
 }
-
-
-

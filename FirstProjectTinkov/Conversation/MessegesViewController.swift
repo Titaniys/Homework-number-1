@@ -8,6 +8,7 @@
 
 import UIKit
 import MultipeerConnectivity
+import CoreData
 
 class MessegesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, CommunicatorDelegate{
 	
@@ -16,14 +17,33 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet var sendMessageButton: UIButton!
     
 	var navigationItemTitle : String?
-	var user : ConversationModel!
+	var conversation : Conversation!
+	let storageManager = StorageManager()
 	
 	var multipeerCommunicator : MultipeerCommunicator!
 	
+	fileprivate lazy var fetchedResultsController: NSFetchedResultsController<Message> = {
+	
+		let fetchRequest = NSFetchRequest<Message>(entityName: "Message")
+//		fetchRequest.predicate = NSPredicate.init(format: "conversation.conversationId == %@", conversation.conversationId!)
+		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+		
+		let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: storageManager.mainContext!, sectionNameKeyPath:nil, cacheName: nil)
+		fetchedResultsController.delegate = self
+		
+		return fetchedResultsController
+	}()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = user.name
+		
+		do {
+			try fetchedResultsController.performFetch()
+		} catch  {
+			
+		}
+		
+        self.navigationItem.title = conversation.name
         
 		self.hideKeyboardWhenTappedAround()
 		
@@ -79,24 +99,49 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 		
 	}
 	
+	
 	//MARK: UITableViewDataSource
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return user.arrayMessages.count
+		guard let sections = fetchedResultsController.sections else { return 0 }
+		return sections[section].numberOfObjects
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
-		let cellIdentifier = user.arrayMessages[indexPath.row].isIncomming ? "incomingCell" : "outgoingCell"
+		let modelFromDB = fetchedResultsController.object(at: indexPath)
+		
+		let cellIdentifier = modelFromDB.incomming ? "incomingCell" : "outgoingCell"
 		
 		let cell: MessageTableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MessageTableViewCell
 		
-		cell.textMessageLabel?.text = user.arrayMessages[indexPath.row].textMessage
-		cell.isIncomming = user.arrayMessages[indexPath.row].isIncomming
+		cell.textMessageLabel?.text = modelFromDB.text
+		cell.isIncomming = modelFromDB.incomming
 		
 		return cell
 	}
 	
+	//MARK: CoreData
+	
+	//MARK: CoreData methods
+	func getConversationOnId(id: String) -> NSArray {
+		
+		let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Conversation")
+		request.predicate = NSPredicate.init(format: "conversationId == %@", id)
+		
+		var foundedObject: AnyObject? = nil
+		
+		do {
+			
+			foundedObject = try storageManager.saveContext!.fetch(request) as NSArray
+		}
+		catch let error as NSError {
+			
+			print("Ошибка при поиске в БД", error)
+		}
+		
+		return foundedObject as! NSArray
+	}
 	
 	
 	//MARK: UITextViewDelegate
@@ -119,25 +164,23 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 		
 	}
 	func textViewDidEndEditing(_ textView: UITextView) {
-		let inputText: MessageModel = MessageModel(textMessage: textView.text!, isIncomming: false)
-		user.arrayMessages.append(inputText)
+		
+		let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: storageManager.saveContext!)
+		message.setValue(textView.text, forKey: "text")
+		message.setValue(false, forKey: "incomming")
+		message.setValue(Date.init(timeIntervalSinceNow:0), forKey: "date")
+		
+		storageManager.performSave(context: storageManager.saveContext!) { }
+
 		textView.resignFirstResponder()
 	}
 
 	@IBAction func sendMessage(_ sender: Any) {
-		
-		user.date = Date.init(timeIntervalSinceNow:0)
-		OperationQueue.main.addOperation {
-			self.tableView.reloadData()
-			self.tableView.updateConstraints()
+	
+		multipeerCommunicator.sendMessage(string: inputMessageTextView.text, to:conversation.conversationId!) { (Bool, Error) in
 		}
-		
-//		multipeerCommunicator.sendMessage(string: inputMessageTextView.text, to:user.peer! ) { (Bool, Error) in
-		
-//		}
 		inputMessageTextView.text = ""
 	}
-	//MARK: CallbackProtocol
 	
 	//discovering
 	func didFoundUser(userID: MCPeerID, userName: String?) {
@@ -147,7 +190,7 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 	func didLostUser(userID: String) {
 		NSLog("didLostUser %@", userID)
         sendMessageButton.isEnabled = false
-		user.online = false
+//		user.online = false
 	}
 	
 	//errors
@@ -163,14 +206,17 @@ class MessegesViewController: UIViewController, UITableViewDataSource, UITableVi
 	func didReceiveMessage(text: String, fromUser: String, toUser: String) {
 		NSLog("didReceiveMessage %@ fromUser %@ toUser %@", text, fromUser, toUser)
         
-        let inputText: MessageModel = MessageModel(textMessage: text, isIncomming: true)
-        user.arrayMessages.append(inputText)
-		user.date = Date.init(timeIntervalSinceNow:0)
+		let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: storageManager.saveContext!)
+		message.setValue(text, forKey: "text")
+		message.setValue(true, forKey: "incomming")
+		message.setValue(Date.init(timeIntervalSinceNow:0), forKey: "date")
 		
-        OperationQueue.main.addOperation {
-            self.tableView.reloadData()
-            self.tableView.updateConstraints()
-        }
+		storageManager.performSave(context: storageManager.saveContext!) { }
+		
+//        OperationQueue.main.addOperation {
+//            self.tableView.reloadData()
+//            self.tableView.updateConstraints()
+//        }
 	}
 }
 
@@ -183,5 +229,45 @@ extension MessegesViewController {
 	
 	@objc func dismissKeyboard() {
 		view.endEditing(true)
+	}
+}
+
+
+// MARK: - NSFetchedResultsControllerDelegate
+
+extension MessegesViewController : NSFetchedResultsControllerDelegate {
+	
+	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+		tableView.beginUpdates()
+	}
+	
+	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+		switch type {
+		case .insert:
+			tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+		case .delete:
+			tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+		case .move:
+			break
+		case .update:
+			break
+		}
+	}
+	
+	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+		switch type {
+		case .insert:
+			tableView.insertRows(at: [newIndexPath!], with: .fade)
+		case .delete:
+			tableView.deleteRows(at: [indexPath!], with: .fade)
+		case .update:
+			tableView.reloadRows(at: [indexPath!], with: .fade)
+		case .move:
+			tableView.moveRow(at: indexPath!, to: newIndexPath!)
+		}
+	}
+	
+	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+		tableView.endUpdates()
 	}
 }
