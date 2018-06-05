@@ -1,4 +1,4 @@
 # PeerCrypto
-Научно-исследовательская работа 
+Научно-исследовательская работа студента
 
-Peer-to-peer messanger for iOS
+Peer-to-peer messenger for iOS. Protect sending of messages using GOST encryption systems.
